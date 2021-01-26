@@ -7,7 +7,8 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
+	/* justify-content: space-between; */
+	gap: 2rem;
 
 	padding: 5rem;
 
@@ -89,6 +90,36 @@ const Container = styled.div`
 					width: 100%;
 				}
 			}
+		}
+	}
+
+	.textBlock
+	{
+		width: 60%;
+		background-color: ${p => p.theme.textWhite}80;
+		border-radius: 1rem;
+		padding: 1rem;
+
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+
+		h1
+		{
+			font-family: Ubuntu;
+			font-weight: 700;
+			font-size: 2rem;
+
+			color: ${p => p.theme.textGray};
+		}
+
+		p
+		{
+			font-family: Roboto;
+			font-size: 1.5rem;
+			color: ${p => p.theme.textGray};
+			
+			text-indent: 1rem;
 		}
 	}
 `
