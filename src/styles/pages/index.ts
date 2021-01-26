@@ -2,6 +2,14 @@ import styled from 'styled-components'
 
 const Container = styled.div`
 	position: relative;
+	height: 200vh;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 5rem;
 
 	.background
 	{
@@ -25,6 +33,62 @@ const Container = styled.div`
 
 			position: absolute;
 			background-image: ${p => `linear-gradient(to bottom, ${p.theme.black}, rgba(0,0,0,0))`};
+		}
+	}
+
+	header
+	{
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+
+		width: 100%;
+
+		.logo
+		{
+			width: 30vw;
+		}
+
+		nav
+		{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			a
+			{
+				font-family: Ubuntu;
+				font-weight: 700;
+				font-size: 2rem;
+
+				color: ${p => p.theme.textWhite};
+				text-decoration: none;
+
+				padding-left: 1rem;
+				padding-right: 1rem;
+
+				border-right: ${p => p.theme.textWhite}80 2px solid;
+
+				:last-child
+				{
+					border: none;
+				}
+
+				::after
+				{
+					content: '';
+					width: 0px;
+					height: 2px;
+					display: block;
+					background: ${p => p.theme.textWhite};
+					transition: 0.25s;
+				}
+
+				:hover::after
+				{
+					width: 100%;
+				}
+			}
 		}
 	}
 `

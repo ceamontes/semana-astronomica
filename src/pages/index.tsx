@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 import Container from '../styles/pages/index'
 import background from '../assets/background.jpg'
+import logo from '../assets/logo.svg'
 
 const Home: React.FC = () =>
 {
@@ -16,7 +17,18 @@ const Home: React.FC = () =>
 				<Image src={background} layout='fill' />
 			</div>
 
-			<h1>hello world</h1>
+			<header>
+				<div className='logo'>
+					<Image src={logo} width={1000} height={350} layout='responsive' />
+				</div>
+				<nav>
+					<a href='#'>SEMANA ASTRONÔMICA</a>
+					<a href='#'>INSCRIÇÕES</a>
+					<a href='#'>SOBRE</a>
+					<a href='#'>CONTATO</a>
+				</nav>
+			</header>
+
 		</Container>
 	)
 }
