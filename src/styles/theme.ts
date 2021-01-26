@@ -4,7 +4,7 @@ const theme =
 	textWhite: '#ffffff',
 	blue: '#5daccb',
 	green: '#2dce98',
-	black: '#343434',
+	black: '#000',
 	gray: '#606060',
 }
 

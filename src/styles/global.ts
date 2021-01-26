@@ -16,6 +16,24 @@ export default createGlobalStyle`
 
 	body
 	{
+		background-color: ${p => p.theme.black};
+
+		::-webkit-scrollbar
+		{
+			width: 1rem;
+		}
+		::-webkit-scrollbar-track
+		{
+			background-color: ${p => p.theme.blue}26;
+		}
 		
+		::-webkit-scrollbar-thumb
+		{
+			background-color: ${p => p.theme.blue};
+			:hover
+			{
+				background-color: ${p => p.theme.blue}bf;
+			}
+		}
 	}
 `
