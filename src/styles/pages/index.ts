@@ -2,13 +2,11 @@ import styled from 'styled-components'
 
 const Container = styled.div`
 	position: relative;
-	height: 200vh;
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* justify-content: space-between; */
-	gap: 2rem;
+	gap: 3rem;
 
 	padding: 5rem;
 
@@ -19,7 +17,7 @@ const Container = styled.div`
 		left: 0;
 		
 		width: calc(100vw - 1rem);
-		height: 200vh;
+		height: 100%;
 
 		z-index: -1;
 
