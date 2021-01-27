@@ -16,7 +16,7 @@ export default createGlobalStyle`
 
 	body
 	{
-		background-color: ${p => p.theme.black};
+		background-color: ${p => p.theme.background};
 
 		::-webkit-scrollbar
 		{
