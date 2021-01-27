@@ -157,11 +157,11 @@ const Container = styled.div`
 	.subscribe
 	{
 		background-color: ${p => p.theme.background}80;
-		border: ${p => p.theme.blue} 2px solid;
+		border: ${p => p.theme.primary} 2px solid;
 		border-radius: 100rem;
 
 		padding: 1rem;
-		color: ${p => p.theme.blue};
+		color: ${p => p.theme.primary};
 
 		display: flex;
 		align-items: center;
@@ -172,7 +172,7 @@ const Container = styled.div`
 
 		:hover
 		{
-			background-color: ${p => p.theme.blue};
+			background-color: ${p => p.theme.primary};
 			color: ${p => p.theme.background};
 
 			transform: scale(1.1);

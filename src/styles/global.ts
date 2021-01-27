@@ -24,15 +24,15 @@ export default createGlobalStyle`
 		}
 		::-webkit-scrollbar-track
 		{
-			background-color: ${p => p.theme.blue}26;
+			background-color: ${p => p.theme.primary}26;
 		}
 		
 		::-webkit-scrollbar-thumb
 		{
-			background-color: ${p => p.theme.blue};
+			background-color: ${p => p.theme.primary};
 			:hover
 			{
-				background-color: ${p => p.theme.blue}bf;
+				background-color: ${p => p.theme.primary}bf;
 			}
 		}
 	}
