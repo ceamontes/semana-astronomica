@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import {AiOutlineForm} from 'react-icons/ai'
+import {useRouter} from 'next/dist/client/router'
 
 import Container from '../styles/pages/index'
 import background from '../assets/background.jpg'
@@ -8,6 +10,8 @@ import logo from '../assets/logo.svg'
 
 const Home: React.FC = () =>
 {
+	const {push} = useRouter()
+
 	return (
 		<Container>
 			<Head>
@@ -24,11 +28,15 @@ const Home: React.FC = () =>
 				</div>
 				<nav>
 					<Link href='#semana-astronomica'>SEMANA ASTRONÔMICA</Link>
-					<Link href='#'>INSCRIÇÕES</Link>
 					<Link href='#sobre'>SOBRE</Link>
 					<Link href='#contato'>CONTATO</Link>
 				</nav>
 			</header>
+
+			<button className='subscribe' onClick={() => push('/inscricao')} >
+				<AiOutlineForm size={30} />
+				<span>Inscreva-se</span>
+			</button>
 
 			<div id='semana-astronomica' className='textBlock' >
 				<h1>2ª SEMANA ASTRONÔMICA</h1>
@@ -55,6 +63,11 @@ const Home: React.FC = () =>
 					Nam tempor sodales consectetur. Curabitur ullamcorper libero eu tristique laoreet. In hac habitasse platea dictumst. Fusce ornare odio dignissim quam molestie sollicitudin. Etiam dignissim nisi placerat sollicitudin pellentesque. Duis et justo facilisis, porta massa nec, tempor leo. Nullam imperdiet, velit eget tincidunt sagittis, justo ex gravida nibh, nec viverra nisl libero facilisis felis.
 				</p>
 			</div>
+
+			<button className='subscribe' onClick={() => push('/inscricao')} >
+				<AiOutlineForm size={30} />
+				<span>Inscreva-se</span>
+			</button>
 
 			<div id='contato' className='textBlock contact'>
 				<h1>CONTATO</h1>

@@ -153,6 +153,38 @@ const Container = styled.div`
 			}
 		}
 	}
+
+	.subscribe
+	{
+		background-color: ${p => p.theme.background}80;
+		border: ${p => p.theme.blue} 2px solid;
+		border-radius: 100rem;
+
+		padding: 1rem;
+		color: ${p => p.theme.blue};
+
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+
+		cursor: pointer;
+		transition: 0.25s;
+
+		:hover
+		{
+			background-color: ${p => p.theme.blue};
+			color: ${p => p.theme.background};
+
+			transform: scale(1.1);
+		}
+
+		span
+		{
+			font-family: Ubuntu;
+			font-weight: 700;
+			font-size: 2.5rem;
+		}
+	}
 `
 
 export default Container
