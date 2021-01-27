@@ -22,8 +22,10 @@ const Container = styled.div<ContainerProps>`
 		.group
 		{
 			display: flex;
+			flex-direction: column;
 			align-items: center;
 			justify-content: space-between;
+			gap: 2rem;
 
 			.cancel
 			{
@@ -125,6 +127,14 @@ const Container = styled.div<ContainerProps>`
 				align-items: center;
 				gap: 0.5rem;
 			}
+		}
+	}
+
+	@media(min-width: 1100px)
+	{
+		header .group
+		{
+			flex-direction: row;
 		}
 	}
 `

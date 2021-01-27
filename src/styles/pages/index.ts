@@ -2,13 +2,14 @@ import styled from 'styled-components'
 
 const Container = styled.div`
 	position: relative;
+	width: 100%;
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 3rem;
 
-	padding: 5rem;
+	padding: 2rem;
 
 	.background
 	{
@@ -16,7 +17,7 @@ const Container = styled.div`
 		top: 0;
 		left: 0;
 		
-		width: calc(100vw - 1rem);
+		width: 100%;
 		height: 100%;
 
 		z-index: -1;
@@ -45,12 +46,14 @@ const Container = styled.div`
 
 		.logo
 		{
-			width: 30vw;
+			width: 75vw;
+			max-width: 30rem;
 		}
 
 		nav
 		{
 			display: flex;
+			flex-direction: column;
 			align-items: center;
 			justify-content: center;
 
@@ -60,32 +63,22 @@ const Container = styled.div`
 				font-weight: 700;
 				font-size: 2rem;
 
+				width: 25rem;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
 				color: ${p => p.theme.textWhite};
 				text-decoration: none;
 
-				padding-left: 1rem;
-				padding-right: 1rem;
-
-				border-right: ${p => p.theme.textWhite}80 2px solid;
+				border-bottom: ${p => p.theme.textWhite}80 2px solid;
+				padding-top: 1rem;
+				padding-bottom: 1rem;
 
 				:last-child
 				{
 					border: none;
-				}
-
-				::after
-				{
-					content: '';
-					width: 0px;
-					height: 2px;
-					display: block;
-					background: ${p => p.theme.textWhite};
-					transition: 0.25s;
-				}
-
-				:hover::after
-				{
-					width: 100%;
 				}
 			}
 		}
@@ -93,7 +86,7 @@ const Container = styled.div`
 
 	.textBlock
 	{
-		width: 60%;
+		width: 95%;
 		background-color: ${p => p.theme.textWhite}80;
 		border-radius: 1rem;
 		padding: 1rem;
@@ -138,7 +131,7 @@ const Container = styled.div`
 			{
 				color: ${p => p.theme.textWhite};
 				font-family: Roboto;
-				font-size: 2rem;
+				font-size: 1.5rem;
 			}
 
 			li a
@@ -183,6 +176,62 @@ const Container = styled.div`
 			font-family: Ubuntu;
 			font-weight: 700;
 			font-size: 2.5rem;
+		}
+	}
+
+	@media(min-width: 1100px)
+	{
+		padding: 5rem;
+
+		header
+		{
+			.logo
+			{
+				width: 30vw;
+			}
+
+			nav
+			{
+				flex-direction: row;
+
+				a
+				{
+					width: fit-content;
+					flex-direction: column;
+
+					padding: 0;
+					padding-left: 1rem;
+					padding-right: 1rem;
+
+					border: 0;
+					border-right: ${p => p.theme.textWhite}80 2px solid;
+
+					::after
+					{
+						content: '';
+						width: 0px;
+						height: 2px;
+						display: block;
+						background: ${p => p.theme.textWhite};
+						transition: 0.25s;
+					}
+
+					:hover::after
+					{
+						width: 100%;
+					}
+				}
+			}
+		}
+
+		.textBlock
+		{
+			width: 60%;
+		}
+
+		.contact ul *
+		{
+			font-size: 2rem;
 		}
 	}
 `
