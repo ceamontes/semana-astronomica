@@ -26,7 +26,7 @@ const Home: React.FC = () =>
 					<Link href='#semana-astronomica'>SEMANA ASTRONÔMICA</Link>
 					<Link href='#'>INSCRIÇÕES</Link>
 					<Link href='#sobre'>SOBRE</Link>
-					<Link href='#'>CONTATO</Link>
+					<Link href='#contato'>CONTATO</Link>
 				</nav>
 			</header>
 
@@ -44,7 +44,7 @@ const Home: React.FC = () =>
 			</div>
 
 			<div id='sobre' className='textBlock' >
-				<h1>Sobre o CEAMONTES</h1>
+				<h1>SOBRE O CEAMONTES</h1>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas hendrerit, odio nec dignissim consequat, nisi ante mollis ipsum, sed aliquet sem augue quis risus. Donec posuere placerat purus, at tempor justo cursus at. Suspendisse at ex eget elit lacinia tempus. Nullam tincidunt risus purus, sit amet ultricies elit ultrices non. Nulla facilisis elit at sollicitudin blandit.
 				</p>
@@ -56,6 +56,13 @@ const Home: React.FC = () =>
 				</p>
 			</div>
 
+			<div id='contato' className='textBlock contact'>
+				<h1>CONTATO</h1>
+				<ul>
+					<li>E-mail: <a href='mailto:ceamontes.org.br@gmail.com'>ceamontes.org.br@gmail.com</a></li>
+					<li>Telefone: (38) 99999-9999</li>
+				</ul>
+			</div>
 		</Container>
 	)
 }

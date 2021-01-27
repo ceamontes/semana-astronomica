@@ -120,6 +120,39 @@ const Container = styled.div`
 			text-indent: 1rem;
 		}
 	}
+
+	.contact
+	{
+		background-color: ${p => p.theme.textGray}80;
+
+		h1
+		{
+			color: ${p => p.theme.textWhite};
+		}
+
+		ul
+		{
+			margin-left: 5rem;
+
+			*
+			{
+				color: ${p => p.theme.textWhite};
+				font-family: Roboto;
+				font-size: 2rem;
+			}
+
+			li a
+			{
+				text-decoration: none;
+				font-weight: 700;
+
+				:hover
+				{
+					text-decoration: underline;
+				}
+			}
+		}
+	}
 `
 
 export default Container
