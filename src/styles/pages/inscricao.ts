@@ -130,11 +130,65 @@ const Container = styled.div<ContainerProps>`
 		}
 	}
 
+	main
+	{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2rem;
+
+		padding: 1rem;
+
+		h1
+		{
+			font-family: Roboto;
+			font-weight: 700;
+			font-size: 2rem;
+
+			color: ${p => p.theme.primary};
+		}
+
+		.grid
+		{
+			display: grid;
+			grid-auto-rows: 50rem;
+			grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+			grid-gap: 2rem;
+			align-items: center;
+			justify-items: center;
+		}
+	}
+
 	@media(min-width: 1100px)
 	{
 		header .group
 		{
 			flex-direction: row;
+		}
+	}
+`
+
+export const Card = styled.div`
+	height: 50rem;
+	width: 30rem;
+	background-color: ${p => p.theme.background};
+
+	padding: 1rem;
+	border-radius: 1rem;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	border: ${p => p.theme.secondary}40 2px solid;
+
+	.img
+	{
+		width: 100%;
+
+		img
+		{
+			border-radius: 1rem;
 		}
 	}
 `

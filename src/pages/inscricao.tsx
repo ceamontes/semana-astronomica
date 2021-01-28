@@ -3,10 +3,10 @@ import {useEffect, useState} from 'react'
 import {FiArrowLeft, FiMinus, FiPlus} from 'react-icons/fi'
 import {FaAngleLeft, FaAngleRight} from 'react-icons/fa'
 import {useRouter} from 'next/router'
-
-import Container from '../styles/pages/inscricao'
-import logo from '../assets/logo.svg'
 import Image from 'next/image'
+
+import Container, {Card} from '../styles/pages/inscricao'
+import logo from '../assets/logo.svg'
 import events from '../../db/events.json'
 
 const Pedido: React.FC = () =>
@@ -37,7 +37,7 @@ const Pedido: React.FC = () =>
 						<h1>Selecione os eventos que você deseja participar</h1>
 						<div className='grid'>
 							{events.map((event, index) => (
-								<div key={index} >
+								<Card key={index} >
 									<div className='img'>
 										<Image src={event.image} width={500} height={350} />
 									</div>
@@ -54,7 +54,7 @@ const Pedido: React.FC = () =>
 										))}
 									</ul>
 									<p>{event.description}</p>
-								</div>
+								</Card>
 							))}
 						</div>
 					</main>
