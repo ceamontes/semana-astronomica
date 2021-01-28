@@ -150,9 +150,11 @@ const Container = styled.div<ContainerProps>`
 
 		.grid
 		{
+			width: 100%;
+
 			display: grid;
 			grid-auto-rows: 50rem;
-			grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+			grid-template-columns: repeat(auto-fill, minmax(33rem, 1fr));
 			grid-gap: 2rem;
 			align-items: center;
 			justify-items: center;
@@ -170,7 +172,7 @@ const Container = styled.div<ContainerProps>`
 
 export const Card = styled.div`
 	height: 50rem;
-	width: 30rem;
+	width: 33rem;
 	background-color: ${p => p.theme.background};
 
 	padding: 1rem;
@@ -178,9 +180,11 @@ export const Card = styled.div`
 
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	justify-content: space-between;
 
 	border: ${p => p.theme.secondary}40 2px solid;
+	color: ${p => p.theme.primary};
 
 	.img
 	{
@@ -189,6 +193,77 @@ export const Card = styled.div`
 		img
 		{
 			border-radius: 1rem;
+		}
+	}
+
+	h2
+	{
+		font-family: Ubuntu;
+		font-size: 2rem;
+
+		width: 100%;
+	}
+
+	.group
+	{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		width: 100%;
+
+		span
+		{
+			font-family: Roboto;
+			font-size: 1.5rem;
+		}
+	}
+
+	.lecturers
+	{
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+
+		padding-left: 5rem;
+		width: 100%;
+		
+		li
+		{
+			font-family: Roboto;
+			font-size: 1.5rem;
+		}
+	}
+
+	p
+	{
+		font-family: Roboto;
+		font-size: 1.25rem;
+
+		text-align: justify;
+	}
+
+	.select
+	{
+		background: none;
+		border: ${p => p.theme.primary} 1px solid;
+		color: ${p => p.theme.primary};
+
+		font-family: Ubuntu;
+		font-weight: 700;
+		font-size: 1.5rem;
+
+		padding: 0.5rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		border-radius: 100rem;
+
+		transition: 0.25s;
+
+		:hover
+		{
+			background-color: ${p => p.theme.primary};
+			color: ${p => p.theme.background};
 		}
 	}
 `

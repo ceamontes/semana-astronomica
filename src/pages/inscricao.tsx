@@ -34,7 +34,7 @@ const Pedido: React.FC = () =>
 			case 1:
 				return (
 					<main>
-						<h1>Selecione os eventos que você deseja participar</h1>
+						<h1>Selecione os eventos em que você deseja participar</h1>
 						<div className='grid'>
 							{events.map((event, index) => (
 								<Card key={index} >
@@ -54,6 +54,10 @@ const Pedido: React.FC = () =>
 										))}
 									</ul>
 									<p>{event.description}</p>
+
+									<button className='select'>
+										Selecionar
+									</button>
 								</Card>
 							))}
 						</div>
