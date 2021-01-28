@@ -38,6 +38,9 @@ const Pedido: React.FC = () =>
 						<div className='grid'>
 							{events.map((event, index) => (
 								<div key={index} >
+									<div className='img'>
+										<Image src={event.image} width={500} height={350} />
+									</div>
 									<h2>{event.title}</h2>
 									<div className='group'>
 										<span>{event.date}</span>
