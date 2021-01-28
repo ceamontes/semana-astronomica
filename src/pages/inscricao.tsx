@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import {useEffect, useState} from 'react'
-import {FiArrowLeft, FiMinus, FiPlus} from 'react-icons/fi'
+import {FiArrowLeft, FiCheck, FiMinus, FiPlus, FiX} from 'react-icons/fi'
 import {FaAngleLeft, FaAngleRight} from 'react-icons/fa'
 import {useRouter} from 'next/router'
 import Image from 'next/image'
@@ -14,6 +14,7 @@ const Pedido: React.FC = () =>
 	const router = useRouter()
 
 	const [step, setStep] = useState(1)
+	const [selectedEvents, setSelectedEvents] = useState<number[]>([])
 
 	function goBack()
 	{
@@ -27,6 +28,19 @@ const Pedido: React.FC = () =>
 			setStep(step + 1)
 	}
 
+	function handleSelectEvent(event: number)
+	{
+		let tmpSelectedEvents = [...selectedEvents]
+		const index = tmpSelectedEvents.findIndex(tmpEvent => tmpEvent === event)
+
+		if (index >= 0)
+			tmpSelectedEvents.splice(index, 1)
+		else
+			tmpSelectedEvents.push(event)
+
+		setSelectedEvents(tmpSelectedEvents)
+	}
+
 	const Step: React.FC = () =>
 	{
 		switch (step)
@@ -37,7 +51,7 @@ const Pedido: React.FC = () =>
 						<h1>Selecione os eventos em que você deseja participar</h1>
 						<div className='grid'>
 							{events.map((event, index) => (
-								<Card key={index} >
+								<Card key={index} isSelected={selectedEvents.includes(index)} >
 									<div className='img'>
 										<Image src={event.image} width={500} height={350} />
 									</div>
@@ -55,8 +69,22 @@ const Pedido: React.FC = () =>
 									</ul>
 									<p>{event.description}</p>
 
-									<button className='select'>
-										Selecionar
+									<button className='select' onClick={() => handleSelectEvent(index)}>
+										{
+											!selectedEvents.includes(index)
+											? (
+												<>
+													<FiCheck size={15} />
+													<span>Selecionar</span>
+												</>
+											)
+											: (
+												<>
+													<FiX size={15} />
+													<span>Deselecionar</span>
+												</>
+											)
+										}
 									</button>
 								</Card>
 							))}

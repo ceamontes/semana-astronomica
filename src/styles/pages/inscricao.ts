@@ -170,7 +170,12 @@ const Container = styled.div<ContainerProps>`
 	}
 `
 
-export const Card = styled.div`
+interface CardProps
+{
+	isSelected: boolean
+}
+
+export const Card = styled.div<CardProps>`
 	height: 50rem;
 	width: 33rem;
 	background-color: ${p => p.theme.background};
@@ -183,8 +188,9 @@ export const Card = styled.div`
 	align-items: center;
 	justify-content: space-between;
 
-	border: ${p => p.theme.secondary}40 2px solid;
 	color: ${p => p.theme.primary};
+	border: ${p => p.isSelected ? p.theme.secondary : p.theme.primary + 40} 2px solid;
+	transition: 0.25s;
 
 	.img
 	{
@@ -258,9 +264,13 @@ export const Card = styled.div`
 		padding-right: 1rem;
 		border-radius: 100rem;
 
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+
 		transition: 0.25s;
 
-		:hover
+		:hover, :active
 		{
 			background-color: ${p => p.theme.primary};
 			color: ${p => p.theme.background};
