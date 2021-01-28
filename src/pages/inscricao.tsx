@@ -7,6 +7,7 @@ import {useRouter} from 'next/router'
 import Container from '../styles/pages/inscricao'
 import logo from '../assets/logo.svg'
 import Image from 'next/image'
+import events from '../../db/events.json'
 
 const Pedido: React.FC = () =>
 {
@@ -32,7 +33,28 @@ const Pedido: React.FC = () =>
 		{
 			case 1:
 				return (
-					<main>ingressos</main>
+					<main>
+						<h1>Selecione os eventos que você deseja participar</h1>
+						<div className='grid'>
+							{events.map((event, index) => (
+								<div key={index} >
+									<h2>{event.title}</h2>
+									<div className='group'>
+										<span>{event.date}</span>
+										<span>{event.time}</span>
+									</div>
+									<ul className='lecturers'>
+										{event.lecturers.map((lecturer, index) => (
+											<li key={index} >
+												{lecturer}
+											</li>
+										))}
+									</ul>
+									<p>{event.description}</p>
+								</div>
+							))}
+						</div>
+					</main>
 				)
 			case 2:
 				return (
