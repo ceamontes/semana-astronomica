@@ -8,6 +8,7 @@ import Image from 'next/image'
 import Container, {Card} from '../styles/pages/inscricao'
 import logo from '../assets/logo.svg'
 import events from '../../db/events.json'
+import warningAlert from '../utils/alerts/warning'
 
 const Pedido: React.FC = () =>
 {
@@ -24,7 +25,9 @@ const Pedido: React.FC = () =>
 
 	function goNext()
 	{
-		if (step < 4)
+		if (step === 1 && selectedEvents.length === 0)
+			warningAlert('Você precisa selecionar pelo menos 1 evento!')
+		else if (step < 4)
 			setStep(step + 1)
 	}
 
