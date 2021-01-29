@@ -37,4 +37,29 @@ export default createGlobalStyle`
 			}
 		}
 	}
+
+	.swal2-popup
+	{
+		background-color: ${p => p.theme.background} !important;
+
+		#swal2-title
+		{
+			font-family: Ubuntu;
+			font-size: 25px;
+			color: ${p => p.theme.primary};
+		}
+
+		#swal2-content
+		{
+			font-family: Roboto;
+			font-size: 20px !important;
+			color: ${p => p.theme.primary};
+		}
+
+		.swal2-actions
+		{
+			font-size: 15px !important;
+			font-family: Ubuntu !important;
+		}
+	}
 `
