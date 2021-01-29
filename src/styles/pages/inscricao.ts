@@ -186,7 +186,7 @@ const Container = styled.div<ContainerProps>`
 					padding-left: 1rem;
 				}
 
-				input
+				input[type=text]
 				{
 					border: none;
 					border-bottom: ${p => p.theme.gray} 2px solid;
@@ -205,6 +205,21 @@ const Container = styled.div<ContainerProps>`
 					:focus, :hover
 					{
 						border-bottom-color: ${p => p.theme.primary};
+					}
+				}
+
+				.option
+				{
+					margin-left: 2rem;
+
+					display: flex;
+					align-items: center;
+					gap: 1rem;
+
+					label
+					{
+						border: 0;
+						padding: 0;
 					}
 				}
 			}

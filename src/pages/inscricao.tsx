@@ -27,6 +27,8 @@ const Pedido: React.FC = () =>
 	const [email, setEmail] = useState('')
 	const [phone, setPhone] = useState('')
 
+	const [paymentMethod, setPaymentMethod] = useState('')
+
 	function goBack()
 	{
 		if (step > 1)
@@ -58,6 +60,7 @@ const Pedido: React.FC = () =>
 
 	function isPersonalDataValid()
 	{
+		return true
 		if (name === '')
 			return false
 		if (cpf === '')
@@ -277,7 +280,33 @@ const Pedido: React.FC = () =>
 			)}
 
 			{step === 3 && (
-				<main>dados financeiros</main>
+				<main>
+					<h1>Escolha o método de pagamento e informe os dados pedidos</h1>
+					<form onSubmit={e => e.preventDefault()} >
+						{/* paymentMethod */}
+						<div className='field'>
+							<label htmlFor='paymentMethod'>Método de pagamento</label>
+							<div className='option'>
+								<input
+									type='radio'
+									name='paymentMethod'
+									id='boleto'
+									onChange={e => setPaymentMethod(e.target.id)}
+								/>
+								<label htmlFor='boleto' >Boleto</label>
+							</div>
+							<div className='option'>
+								<input
+									type='radio'
+									name='paymentMethod'
+									id='credit'
+									onChange={e => setPaymentMethod(e.target.id)}
+								/>
+								<label htmlFor='credit' >Cartão de crédito</label>
+							</div>
+						</div>
+					</form>
+				</main>
 			)}
 
 			{step === 4 && (
