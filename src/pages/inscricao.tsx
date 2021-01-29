@@ -37,6 +37,8 @@ const Pedido: React.FC = () =>
 	{
 		if (step === 1 && selectedEvents.length === 0)
 			warningAlert('Você precisa selecionar pelo menos 1 evento!')
+		else if (step === 2 && !isPersonalDataValid())
+			warningAlert('Você deve preencher todos os campos marcados com "*"!')
 		else if (step < 4)
 			setStep(step + 1)
 	}
@@ -52,6 +54,28 @@ const Pedido: React.FC = () =>
 			tmpSelectedEvents.push(event)
 
 		setSelectedEvents(tmpSelectedEvents)
+	}
+
+	function isPersonalDataValid()
+	{
+		if (name === '')
+			return false
+		if (cpf === '')
+			return false
+		if (cep === '')
+			return false
+		if (street === '')
+			return false
+		if (number === '')
+			return false
+		if (neighborhood === '')
+			return false
+		if (email === '')
+			return false
+		if (phone === '')
+			return false
+
+		return true
 	}
 
 	const Step: React.FC = () =>
@@ -111,7 +135,7 @@ const Pedido: React.FC = () =>
 						<form onSubmit={e => e.preventDefault()} >
 							{/* name */}
 							<div className='field'>
-								<label htmlFor='name'>Nome</label>
+								<label htmlFor='name'>Nome *</label>
 								<input
 									name='name'
 									id='name'
@@ -122,7 +146,7 @@ const Pedido: React.FC = () =>
 							</div>
 							{/* cpf */}
 							<div className='field'>
-								<label htmlFor='cpf'>CPF</label>
+								<label htmlFor='cpf'>CPF *</label>
 								<input
 									name='cpf'
 									id='cpf'
@@ -133,7 +157,7 @@ const Pedido: React.FC = () =>
 							</div>
 							{/* cep */}
 							<div className='field'>
-								<label htmlFor='cep'>Cep</label>
+								<label htmlFor='cep'>Cep *</label>
 								<input
 									name='cep'
 									id='cep'
@@ -144,7 +168,7 @@ const Pedido: React.FC = () =>
 							</div>
 							{/* street */}
 							<div className='field'>
-								<label htmlFor='street'>Logradouro</label>
+								<label htmlFor='street'>Logradouro *</label>
 								<input
 									name='street'
 									id='street'
@@ -155,7 +179,7 @@ const Pedido: React.FC = () =>
 							</div>
 							{/* number */}
 							<div className='field'>
-								<label htmlFor='number'>Número</label>
+								<label htmlFor='number'>Número *</label>
 								<input
 									name='number'
 									id='number'
@@ -177,7 +201,7 @@ const Pedido: React.FC = () =>
 							</div>
 							{/* neighborhood */}
 							<div className='field'>
-								<label htmlFor='neighborhood'>Bairro</label>
+								<label htmlFor='neighborhood'>Bairro *</label>
 								<input
 									name='neighborhood'
 									id='neighborhood'
@@ -188,7 +212,7 @@ const Pedido: React.FC = () =>
 							</div>
 							{/* email */}
 							<div className='field'>
-								<label htmlFor='email'>E-mail</label>
+								<label htmlFor='email'>E-mail *</label>
 								<input
 									name='email'
 									id='email'
@@ -199,7 +223,7 @@ const Pedido: React.FC = () =>
 							</div>
 							{/* phone */}
 							<div className='field'>
-								<label htmlFor='phone'>Celular</label>
+								<label htmlFor='phone'>Celular *</label>
 								<input
 									name='phone'
 									id='phone'
