@@ -17,6 +17,16 @@ const Pedido: React.FC = () =>
 	const [step, setStep] = useState(1)
 	const [selectedEvents, setSelectedEvents] = useState<number[]>([])
 
+	const [name, setName] = useState('')
+	const [cpf, setCpf] = useState('')
+	const [cep, setCep] = useState('')
+	const [street, setStreet] = useState('')
+	const [number, setNumber] = useState('')
+	const [complement, setComplement] = useState('')
+	const [neighborhood, setNeighborhood] = useState('')
+	const [email, setEmail] = useState('')
+	const [phone, setPhone] = useState('')
+
 	function goBack()
 	{
 		if (step > 1)
@@ -96,7 +106,110 @@ const Pedido: React.FC = () =>
 				)
 			case 2:
 				return (
-					<main>dados pessoais</main>
+					<main>
+						<h1>Informe seus dados pessoais abaixo</h1>
+						<form onSubmit={e => e.preventDefault()} >
+							{/* name */}
+							<div className='field'>
+								<label htmlFor='name'>Nome</label>
+								<input
+									name='name'
+									id='name'
+									type='text'
+									value={name}
+									onChange={e => setName(e.target.value)}
+								/>
+							</div>
+							{/* cpf */}
+							<div className='field'>
+								<label htmlFor='cpf'>CPF</label>
+								<input
+									name='cpf'
+									id='cpf'
+									type='text'
+									value={cpf}
+									onChange={e => setCpf(e.target.value)}
+								/>
+							</div>
+							{/* cep */}
+							<div className='field'>
+								<label htmlFor='cep'>Cep</label>
+								<input
+									name='cep'
+									id='cep'
+									type='text'
+									value={cep}
+									onChange={e => setCep(e.target.value)}
+								/>
+							</div>
+							{/* street */}
+							<div className='field'>
+								<label htmlFor='street'>Logradouro</label>
+								<input
+									name='street'
+									id='street'
+									type='text'
+									value={street}
+									onChange={e => setStreet(e.target.value)}
+								/>
+							</div>
+							{/* number */}
+							<div className='field'>
+								<label htmlFor='number'>Número</label>
+								<input
+									name='number'
+									id='number'
+									type='text'
+									value={number}
+									onChange={e => setNumber(e.target.value)}
+								/>
+							</div>
+							{/* complement */}
+							<div className='field'>
+								<label htmlFor='complement'>Complemento</label>
+								<input
+									name='complement'
+									id='complement'
+									type='text'
+									value={complement}
+									onChange={e => setComplement(e.target.value)}
+								/>
+							</div>
+							{/* neighborhood */}
+							<div className='field'>
+								<label htmlFor='neighborhood'>Bairro</label>
+								<input
+									name='neighborhood'
+									id='neighborhood'
+									type='text'
+									value={neighborhood}
+									onChange={e => setNeighborhood(e.target.value)}
+								/>
+							</div>
+							{/* email */}
+							<div className='field'>
+								<label htmlFor='email'>E-mail</label>
+								<input
+									name='email'
+									id='email'
+									type='text'
+									value={email}
+									onChange={e => setEmail(e.target.value)}
+								/>
+							</div>
+							{/* phone */}
+							<div className='field'>
+								<label htmlFor='phone'>Celular</label>
+								<input
+									name='phone'
+									id='phone'
+									type='text'
+									value={phone}
+									onChange={e => setPhone(e.target.value)}
+								/>
+							</div>
+						</form>
+					</main>
 				)
 			case 3:
 				return (
