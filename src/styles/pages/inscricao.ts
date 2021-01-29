@@ -159,6 +159,56 @@ const Container = styled.div<ContainerProps>`
 			align-items: center;
 			justify-items: center;
 		}
+
+		form
+		{
+			width: 100%;
+			padding-right: 2rem;
+		
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
+
+			.field
+			{
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+
+				label
+				{
+					font-family: Ubuntu;
+					font-size: 2rem;
+					font-weight: 700;
+
+					color: ${p => p.theme.primary};
+					border-left: ${p => p.theme.primary} 5px solid;
+					padding-left: 1rem;
+				}
+
+				input
+				{
+					border: none;
+					border-bottom: ${p => p.theme.gray} 2px solid;
+					background-color: ${p => p.theme.textGray}80;
+					height: 2.5rem;
+
+					font-family: Roboto;
+					font-size: 2rem;
+					color: ${p => p.theme.primary};
+
+					padding: 1rem;
+					margin-left: 2rem;
+
+					transition: 0.25s;
+
+					:focus, :hover
+					{
+						border-bottom-color: ${p => p.theme.primary};
+					}
+				}
+			}
+		}
 	}
 
 	@media(min-width: 1100px)
