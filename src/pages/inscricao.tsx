@@ -41,6 +41,8 @@ const Pedido: React.FC = () =>
 			warningAlert('Você precisa selecionar pelo menos 1 evento!')
 		else if (step === 2 && !isPersonalDataValid())
 			warningAlert('Você deve preencher todos os campos marcados com "*"!')
+		else if (step === 3 && paymentMethod === '')
+			warningAlert('Você precisa escolher um método de pagamento!')
 		else if (step < 4)
 			setStep(step + 1)
 	}
@@ -60,7 +62,6 @@ const Pedido: React.FC = () =>
 
 	function isPersonalDataValid()
 	{
-		return true
 		if (name === '')
 			return false
 		if (cpf === '')
@@ -281,7 +282,7 @@ const Pedido: React.FC = () =>
 
 			{step === 3 && (
 				<main>
-					<h1>Escolha o método de pagamento e informe os dados pedidos</h1>
+					<h1>Escolha o método de pagamento</h1>
 					<form onSubmit={e => e.preventDefault()} >
 						{/* paymentMethod */}
 						<div className='field'>
