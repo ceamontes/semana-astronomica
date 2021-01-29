@@ -78,174 +78,6 @@ const Pedido: React.FC = () =>
 		return true
 	}
 
-	const Step: React.FC = () =>
-	{
-		switch (step)
-		{
-			case 1:
-				return (
-					<main>
-						<h1>Selecione os eventos em que você deseja participar</h1>
-						<div className='grid'>
-							{events.map((event, index) => (
-								<Card key={index} isSelected={selectedEvents.includes(index)} >
-									<div className='img'>
-										<Image src={event.image} width={500} height={350} />
-									</div>
-									<h2>{event.title}</h2>
-									<div className='group'>
-										<span>{event.date}</span>
-										<span>{event.time}</span>
-									</div>
-									<ul className='lecturers'>
-										{event.lecturers.map((lecturer, index) => (
-											<li key={index} >
-												{lecturer}
-											</li>
-										))}
-									</ul>
-									<p>{event.description}</p>
-
-									<button className='select' onClick={() => handleSelectEvent(index)}>
-										{
-											!selectedEvents.includes(index)
-											? (
-												<>
-													<FiCheck size={15} />
-													<span>Selecionar</span>
-												</>
-											)
-											: (
-												<>
-													<FiX size={15} />
-													<span>Deselecionar</span>
-												</>
-											)
-										}
-									</button>
-								</Card>
-							))}
-						</div>
-					</main>
-				)
-			case 2:
-				return (
-					<main>
-						<h1>Informe seus dados pessoais abaixo</h1>
-						<form onSubmit={e => e.preventDefault()} >
-							{/* name */}
-							<div className='field'>
-								<label htmlFor='name'>Nome *</label>
-								<input
-									name='name'
-									id='name'
-									type='text'
-									value={name}
-									onChange={e => setName(e.target.value)}
-								/>
-							</div>
-							{/* cpf */}
-							<div className='field'>
-								<label htmlFor='cpf'>CPF *</label>
-								<input
-									name='cpf'
-									id='cpf'
-									type='text'
-									value={cpf}
-									onChange={e => setCpf(e.target.value)}
-								/>
-							</div>
-							{/* cep */}
-							<div className='field'>
-								<label htmlFor='cep'>Cep *</label>
-								<input
-									name='cep'
-									id='cep'
-									type='text'
-									value={cep}
-									onChange={e => setCep(e.target.value)}
-								/>
-							</div>
-							{/* street */}
-							<div className='field'>
-								<label htmlFor='street'>Logradouro *</label>
-								<input
-									name='street'
-									id='street'
-									type='text'
-									value={street}
-									onChange={e => setStreet(e.target.value)}
-								/>
-							</div>
-							{/* number */}
-							<div className='field'>
-								<label htmlFor='number'>Número *</label>
-								<input
-									name='number'
-									id='number'
-									type='text'
-									value={number}
-									onChange={e => setNumber(e.target.value)}
-								/>
-							</div>
-							{/* complement */}
-							<div className='field'>
-								<label htmlFor='complement'>Complemento</label>
-								<input
-									name='complement'
-									id='complement'
-									type='text'
-									value={complement}
-									onChange={e => setComplement(e.target.value)}
-								/>
-							</div>
-							{/* neighborhood */}
-							<div className='field'>
-								<label htmlFor='neighborhood'>Bairro *</label>
-								<input
-									name='neighborhood'
-									id='neighborhood'
-									type='text'
-									value={neighborhood}
-									onChange={e => setNeighborhood(e.target.value)}
-								/>
-							</div>
-							{/* email */}
-							<div className='field'>
-								<label htmlFor='email'>E-mail *</label>
-								<input
-									name='email'
-									id='email'
-									type='text'
-									value={email}
-									onChange={e => setEmail(e.target.value)}
-								/>
-							</div>
-							{/* phone */}
-							<div className='field'>
-								<label htmlFor='phone'>Celular *</label>
-								<input
-									name='phone'
-									id='phone'
-									type='text'
-									value={phone}
-									onChange={e => setPhone(e.target.value)}
-								/>
-							</div>
-						</form>
-					</main>
-				)
-			case 3:
-				return (
-					<main>dados financeiros</main>
-				)
-			case 4:
-				return (
-					<main>confirmação</main>
-				)
-		}
-	}
-
 	return (
 		<Container step={step} >
 			<Head>
@@ -291,7 +123,166 @@ const Pedido: React.FC = () =>
 				</div>
 			</header>
 
-			<Step />
+			{step === 1 && (
+				<main>
+					<h1>Selecione os eventos em que você deseja participar</h1>
+					<div className='grid'>
+						{events.map((event, index) => (
+							<Card key={index} isSelected={selectedEvents.includes(index)} >
+								<div className='img'>
+									<Image src={event.image} width={500} height={350} />
+								</div>
+								<h2>{event.title}</h2>
+								<div className='group'>
+									<span>{event.date}</span>
+									<span>{event.time}</span>
+								</div>
+								<ul className='lecturers'>
+									{event.lecturers.map((lecturer, index) => (
+										<li key={index} >
+											{lecturer}
+										</li>
+									))}
+								</ul>
+								<p>{event.description}</p>
+
+								<button className='select' onClick={() => handleSelectEvent(index)}>
+									{
+										!selectedEvents.includes(index)
+										? (
+											<>
+												<FiCheck size={15} />
+												<span>Selecionar</span>
+											</>
+										)
+										: (
+											<>
+												<FiX size={15} />
+												<span>Deselecionar</span>
+											</>
+										)
+									}
+								</button>
+							</Card>
+						))}
+					</div>
+				</main>
+			)}
+
+			{step === 2 && (
+				<main>
+					<h1>Informe seus dados pessoais abaixo</h1>
+					<form onSubmit={e => e.preventDefault()} >
+						{/* name */}
+						<div className='field'>
+							<label htmlFor='name'>Nome *</label>
+							<input
+								name='name'
+								id='name'
+								type='text'
+								value={name}
+								onChange={e => setName(e.target.value)}
+							/>
+						</div>
+						{/* cpf */}
+						<div className='field'>
+							<label htmlFor='cpf'>CPF *</label>
+							<input
+								name='cpf'
+								id='cpf'
+								type='text'
+								value={cpf}
+								onChange={e => setCpf(e.target.value)}
+							/>
+						</div>
+						{/* cep */}
+						<div className='field'>
+							<label htmlFor='cep'>Cep *</label>
+							<input
+								name='cep'
+								id='cep'
+								type='text'
+								value={cep}
+								onChange={e => setCep(e.target.value)}
+							/>
+						</div>
+						{/* street */}
+						<div className='field'>
+							<label htmlFor='street'>Logradouro *</label>
+							<input
+								name='street'
+								id='street'
+								type='text'
+								value={street}
+								onChange={e => setStreet(e.target.value)}
+							/>
+						</div>
+						{/* number */}
+						<div className='field'>
+							<label htmlFor='number'>Número *</label>
+							<input
+								name='number'
+								id='number'
+								type='text'
+								value={number}
+								onChange={e => setNumber(e.target.value)}
+							/>
+						</div>
+						{/* complement */}
+						<div className='field'>
+							<label htmlFor='complement'>Complemento</label>
+							<input
+								name='complement'
+								id='complement'
+								type='text'
+								value={complement}
+								onChange={e => setComplement(e.target.value)}
+							/>
+						</div>
+						{/* neighborhood */}
+						<div className='field'>
+							<label htmlFor='neighborhood'>Bairro *</label>
+							<input
+								name='neighborhood'
+								id='neighborhood'
+								type='text'
+								value={neighborhood}
+								onChange={e => setNeighborhood(e.target.value)}
+							/>
+						</div>
+						{/* email */}
+						<div className='field'>
+							<label htmlFor='email'>E-mail *</label>
+							<input
+								name='email'
+								id='email'
+								type='text'
+								value={email}
+								onChange={e => setEmail(e.target.value)}
+							/>
+						</div>
+						{/* phone */}
+						<div className='field'>
+							<label htmlFor='phone'>Celular *</label>
+							<input
+								name='phone'
+								id='phone'
+								type='text'
+								value={phone}
+								onChange={e => setPhone(e.target.value)}
+							/>
+						</div>
+					</form>
+				</main>
+			)}
+
+			{step === 3 && (
+				<main>dados financeiros</main>
+			)}
+
+			{step === 4 && (
+				<main>confirmação</main>
+			)}
 		</Container>
 	)
 }
