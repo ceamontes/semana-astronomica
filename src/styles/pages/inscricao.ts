@@ -32,13 +32,18 @@ const Container = styled.div<ContainerProps>`
 				background: none;
 				border: ${p => p.theme.primary} 2px solid;
 				border-radius: 100rem;
+
+				margin-right: 50%;
+
 				padding: 0.5rem;
 				padding-left: 1rem;
 				padding-right: 1rem;
+
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				gap: 1rem;
+
 				color: ${p => p.theme.primary};
 				cursor: pointer;
 				transition: 0.25s;
