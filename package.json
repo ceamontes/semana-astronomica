@@ -15,7 +15,8 @@
     "react-icons": "^4.1.0",
     "styled-components": "^5.2.1",
     "sweetalert2": "^10.14.0",
-    "sweetalert2-react-content": "^3.2.2"
+    "sweetalert2-react-content": "^3.2.2",
+    "wide-pay-node": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^14.14.22",

@@ -4244,6 +4244,11 @@ wide-align@^1.1.0:
   dependencies:
     string-width "^1.0.2 || 2"
 
+wide-pay-node@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/wide-pay-node/-/wide-pay-node-1.0.1.tgz#0d714402447ec6b7d4ac122bec9694e27a5caed7"
+  integrity sha512-k7HDEiQcCPjm3afcnWkP2fxE8oCv7D1pMgF5qK63y7g+1CT1n95nz0/X27dAOM2V1GTau6snVSRP/e7VVgiezA==
+
 worker-farm@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/worker-farm/-/worker-farm-1.7.0.tgz#26a94c5391bbca926152002f69b84a4bf772e5a8"
