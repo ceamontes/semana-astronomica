@@ -311,7 +311,87 @@ const Pedido: React.FC = () =>
 			)}
 
 			{step === 4 && (
-				<main>confirmação</main>
+				<main>
+					<h1>Confirme seu pedido antes de finalizar</h1>
+					<div className='confirmArea'>
+						<h2>Eventos ({selectedEvents.length})</h2>
+						<ul>
+							{selectedEvents.map(eventIndex =>
+							{
+								const event = events[eventIndex]
+								return (
+									<li className='eventCard' >
+										<div className='img'>
+											<Image src={event.image} width={500} height={350} layout='responsive' />
+										</div>
+										<h3>{event.title}</h3>
+										<div className='group'>
+											<span>{event.date}</span>
+											<span>{event.time}</span>
+										</div>
+									</li>
+								)
+							})}
+						</ul>
+					</div>
+					<div className='confirmArea'>
+						<h2>Dados pessoais</h2>
+						<ul>
+							{/* name */}
+							<li className='confirmData' >
+								<label>Nome</label>
+								<span>{name}</span>
+							</li>
+							{/* cpf */}
+							<li className='confirmData'>
+								<label>CPF</label>
+								<span>{cpf}</span>
+							</li>
+							{/* cep */}
+							<li className='confirmData'>
+								<label>Cep</label>
+								<span>{cep}</span>
+							</li>
+							{/* street */}
+							<li className='confirmData'>
+								<label>Logradouro</label>
+								<span>{street}</span>
+							</li>
+							{/* number */}
+							<li className='confirmData'>
+								<label>Número</label>
+								<span>{number}</span>
+							</li>
+							{/* complement */}
+							<li className='confirmData'>
+								<label>Complemento</label>
+								<span>{complement}</span>
+							</li>
+							{/* neighborhood */}
+							<li className='confirmData'>
+								<label>Bairro</label>
+								<span>{neighborhood}</span>
+							</li>
+							{/* email */}
+							<li className='confirmData'>
+								<label>E-mail</label>
+								<span>{email}</span>
+							</li>
+							{/* phone */}
+							<li className='confirmData'>
+								<label>Celular</label>
+								<span>{phone}</span>
+							</li>
+						</ul>
+					</div>
+					<div className='confirmArea'>
+						<h2>Método de pagamento</h2>
+						<span>
+							{paymentMethod === 'boleto' && 'Boleto'}
+							{paymentMethod === 'credit' && 'Cartão de crédito'}
+						</span>
+					</div>
+				</main>
 			)}
 		</Container>
 	)
