@@ -224,6 +224,105 @@ const Container = styled.div<ContainerProps>`
 				}
 			}
 		}
+
+		.confirmArea
+		{
+			width: 100%;
+
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+
+			*
+			{
+				color: ${p => p.theme.primary};
+				font-family: Roboto;
+			}
+
+			h2
+			{
+				border-left: ${p => p.theme.primary} 5px solid;
+				padding-left: 1rem;
+
+				font-size: 2rem;
+			}
+
+			.grid
+			{
+				grid-auto-rows: 25rem;
+				grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+
+				.eventCard
+				{
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					gap: 0.5rem;
+
+					width: 25rem;
+					height: 25rem;
+
+					background-color: ${p => p.theme.background};
+					border-radius: 1rem;
+					padding: 1rem;
+
+					.img img
+					{
+						border-radius: 1rem;
+					}
+
+					h3
+					{
+						font-size: 1.5rem;
+					}
+
+					.group
+					{
+						display: flex;
+						justify-content: space-between;
+
+						span
+						{
+							font-size: 1.25rem;
+						}
+					}
+				}
+			}
+
+			ul
+			{
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 1rem;
+
+				.confirmData
+				{
+					margin-left: 2rem;
+					width: calc(100% - 2rem);
+
+					display: flex;
+					align-items: center;
+					gap: 1rem;
+
+					*
+					{
+						font-size: 1.5rem;
+					}
+
+					label
+					{
+						font-weight: 700;
+					}
+				}
+			}
+
+			.paymentMethod
+			{
+				margin-left: 2rem;
+				font-size: 1.75rem;
+			}
+		}
 	}
 
 	@media(min-width: 1100px)
