@@ -9,6 +9,7 @@ import Container, {Card} from '../styles/pages/inscricao'
 import logo from '../assets/logo.svg'
 import events from '../../db/events.json'
 import warningAlert from '../utils/alerts/warning'
+import api from '../services/api'
 
 const Pedido: React.FC = () =>
 {
@@ -45,6 +46,8 @@ const Pedido: React.FC = () =>
 			warningAlert('Você precisa escolher um método de pagamento!')
 		else if (step < 4)
 			setStep(step + 1)
+		else
+			handlePayment()
 	}
 
 	function handleSelectEvent(event: number)
@@ -80,6 +83,21 @@ const Pedido: React.FC = () =>
 			return false
 
 		return true
+	}
+
+	function handlePayment()
+	{
+		const data =
+		{
+			paymentMethod,
+			name,
+			cpf,
+			selectedEvents
+		}
+
+		api.post('payment', data)
+			.then(res => console.log('[res.data]', res.data))
+			.catch(err => console.log('[err]', err.response.data))
 	}
 
 	return (

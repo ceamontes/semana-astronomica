@@ -47,14 +47,16 @@ const handlePayment: NextApiHandler = async (req, res) =>
 	else if (method === 'credit')
 		method = 'Cartão'
 
+	const dueDate = moment().add(5, 'days').format('YYYY-MM-DD')
+
 	const options =
 	{
-		pessoa: 'Física',
-		vencimento: paymentMethod === 'boleto' && moment().add(5, 'days').format('YYYY-MM-DD'),
 		forma: method,
 		cliente: name,
+		pessoa: 'Física',
 		cpf: cpf,
-		itens: items
+		itens: items,
+		vencimento: dueDate
 	}
 
 	const widePay = new WidePay(config.widePayId, config.widePayToken)
