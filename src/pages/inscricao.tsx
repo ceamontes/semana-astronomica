@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import {useEffect, useState} from 'react'
-import {FiArrowLeft, FiCheck, FiMinus, FiPlus, FiX} from 'react-icons/fi'
+import {FiArrowLeft, FiCheck, FiX, FiInfo} from 'react-icons/fi'
 import {FaAngleLeft, FaAngleRight} from 'react-icons/fa'
 import {useRouter} from 'next/router'
 import Image from 'next/image'
@@ -307,6 +307,10 @@ const Pedido: React.FC = () =>
 							/>
 						</div>
 					</form>
+					<div className='disclaimer'>
+						<FiInfo size={30} />
+						<p>Os dados pessoais informados serão armazenados em um banco de dados externo para que o CEAMONTES possa analisar seu público e melhorar nossos serviços.</p>
+					</div>
 				</main>
 			)}
 

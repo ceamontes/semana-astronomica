@@ -329,6 +329,24 @@ const Container = styled.div<ContainerProps>`
 				font-size: 1.75rem;
 			}
 		}
+
+		.disclaimer
+		{
+			color: ${p => p.theme.primary};
+			width: 100%;
+
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+
+			p
+			{
+				width: 75vw;
+
+				font-family: Roboto;
+				font-size: 1.5rem;
+			}
+		}
 	}
 
 	.price
