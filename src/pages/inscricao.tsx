@@ -354,7 +354,7 @@ const Pedido: React.FC = () =>
 							{
 								const event = events[eventIndex]
 								return (
-									<li className='eventCard' >
+									<li className='eventCard' key={eventIndex} >
 										<div className='img'>
 											<Image src={event.image} width={500} height={350} layout='responsive' />
 										</div>
