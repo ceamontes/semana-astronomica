@@ -143,6 +143,7 @@ const Container = styled.div<ContainerProps>`
 		gap: 2rem;
 
 		padding: 1rem;
+		padding-bottom: calc(5rem + 1rem + 1rem);
 
 		h1
 		{
@@ -330,6 +331,41 @@ const Container = styled.div<ContainerProps>`
 		}
 	}
 
+	.price
+	{
+		position: fixed;
+		right: 1rem;
+		bottom: 1rem;
+
+		height: 5rem;
+		width: 17rem;
+		background-color: ${p => p.theme.primary};
+
+		border-radius: 1rem;
+		box-shadow: 0px 0px 10px #000;
+
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		padding-left: 1rem;
+		padding-right: 1rem;
+
+		h3
+		{
+			font-family: Ubuntu;
+			font-size: 2rem;
+			color: ${p => p.theme.background};
+		}
+
+		span
+		{
+			font-family: Roboto;
+			font-size: 2rem;
+			color: ${p => p.theme.background};
+		}
+	}
+
 	@media(min-width: 1100px)
 	{
 		header .group
@@ -437,6 +473,7 @@ export const Card = styled.div<CardProps>`
 		align-items: center;
 		gap: 1rem;
 
+		cursor: pointer;
 		transition: 0.25s;
 
 		:hover, :active

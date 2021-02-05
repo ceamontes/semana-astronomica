@@ -157,13 +157,6 @@ const Pedido: React.FC = () =>
 				</div>
 			</header>
 
-			{[1,3,4].includes(step) && (
-				<div className="price">
-					<h3>Valor:</h3>
-					<span>{formatPrice(price)}</span>
-				</div>
-			)}
-
 			{step === 1 && (
 				<main>
 					<h1>Selecione os eventos em que você deseja participar</h1>
@@ -429,6 +422,13 @@ const Pedido: React.FC = () =>
 						</span>
 					</div>
 				</main>
+			)}
+
+			{[1,3,4].includes(step) && (
+				<div className='price'>
+					<h3>Valor:</h3>
+					<span>{formatPrice(price)}</span>
+				</div>
 			)}
 		</Container>
 	)
