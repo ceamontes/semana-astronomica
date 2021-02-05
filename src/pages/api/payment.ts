@@ -4,6 +4,7 @@ import moment from 'moment'
 import WidePay from 'wide-pay-node'
 
 import events from '../../../db/events.json'
+import prices from '../../../db/prices.json'
 
 const {serverRuntimeConfig: env} = getConfig()
 
@@ -30,6 +31,9 @@ const handlePayment: NextApiHandler = async (req, res) =>
 		return res.end(JSON.stringify({message: 'You need to provide payment method, name, cpf, and selected events.'}))
 	}
 
+	const quantity = selectedEvents.length
+	const pricePerItem = (prices[quantity]/quantity).toFixed(2)
+
 	const items = selectedEvents.map(index =>
 	{
 		const event = events[index]
@@ -37,7 +41,7 @@ const handlePayment: NextApiHandler = async (req, res) =>
 		return (
 		{
 			descricao: `${event.title} (palestra)`,
-			valor: 10
+			valor: pricePerItem
 		})
 	})
 
