@@ -5,11 +5,14 @@ import {FaAngleLeft, FaAngleRight} from 'react-icons/fa'
 import {useRouter} from 'next/router'
 import Image from 'next/image'
 
+import events from '../../db/events.json'
+import prices from '../../db/prices.json'
+
 import Container, {Card} from '../styles/pages/inscricao'
 import logo from '../assets/logo.svg'
-import events from '../../db/events.json'
 import warningAlert from '../utils/alerts/warning'
 import api from '../services/api'
+import formatPrice from '../utils/formatPrice'
 
 const Pedido: React.FC = () =>
 {
@@ -29,6 +32,15 @@ const Pedido: React.FC = () =>
 	const [phone, setPhone] = useState('')
 
 	const [paymentMethod, setPaymentMethod] = useState('')
+	const [price, setPrice] = useState(0)
+
+	useEffect(() =>
+	{
+		const quantity = selectedEvents.length
+		const tmpPrice = prices[quantity]
+
+		setPrice(tmpPrice)
+	}, [selectedEvents])
 
 	function goBack()
 	{
@@ -144,6 +156,13 @@ const Pedido: React.FC = () =>
 					</button>
 				</div>
 			</header>
+
+			{[1,3,4].includes(step) && (
+				<div className="price">
+					<h3>Valor:</h3>
+					<span>{formatPrice(price)}</span>
+				</div>
+			)}
 
 			{step === 1 && (
 				<main>
