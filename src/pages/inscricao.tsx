@@ -13,6 +13,7 @@ import logo from '../assets/logo.svg'
 import warningAlert from '../utils/alerts/warning'
 import api from '../services/api'
 import formatPrice from '../utils/formatPrice'
+import errorAlert from '../utils/alerts/error'
 
 const Pedido: React.FC = () =>
 {
@@ -108,8 +109,16 @@ const Pedido: React.FC = () =>
 		}
 
 		api.post('payment', data)
-			.then(res => console.log('[res.data]', res.data))
-			.catch(err => console.log('[err]', err.response.data))
+			.then(res =>
+			{
+				console.log('[res.data]', res.data)
+				router.push(`/success?payment-link=${res.data.link}`)
+			})
+			.catch(err =>
+			{
+				console.log('[err]', err.response.data)
+				errorAlert(err.response.data.message)
+			})
 	}
 
 	return (
