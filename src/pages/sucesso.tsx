@@ -31,7 +31,7 @@ const Success: React.FC = () =>
 					<Image src={logo} width={1000} height={350} layout='responsive' />
 				</div>
 				<div className='message'>
-					<FiCheckCircle size={100} />
+					<FiCheckCircle size={75} />
 					<h1>
 						Sua inscrição foi registrada, mas ainda falta fazer o pagamento para concluí-la!
 					</h1>
@@ -40,7 +40,7 @@ const Success: React.FC = () =>
 
 			<main>
 				<p>
-					Para realizar operações financeiras, o CEAMONTES decidiu usar o serviço <a target='_blank' rel='noreferrer' href='https://www.widepay.com'>Wide Pay</a>, um sistema de pagamentos confiável e seguro.
+					Para realizar operações financeiras, o CEAMONTES decidiu usar o serviço <a target='_blank' rel='noreferrer' href='https://www.widepay.com'>Wide Pay</a>, um sistema de pagamento online confiável e seguro.
 				</p>
 				<a target='_blank' rel='noreferrer' href={link} className='payment'>
 					<span>Fazer pagamento</span>
