@@ -112,7 +112,7 @@ const Pedido: React.FC = () =>
 			.then(res =>
 			{
 				console.log('[res.data]', res.data)
-				router.push(`/success?payment-link=${res.data.link}`)
+				router.push(`/sucesso?link=${res.data.link}`)
 			})
 			.catch(err =>
 			{
