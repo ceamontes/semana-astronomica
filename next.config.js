@@ -6,6 +6,8 @@ module.exports = withImages(
 	serverRuntimeConfig:
 	{
 		widePayId: process.env.WIDE_PAY_ID,
-		widePayToken: process.env.WIDE_PAY_TOKEN
+		widePayToken: process.env.WIDE_PAY_TOKEN,
+		mongodbUri: process.env.MONGODB_URI,
+		mongodbDb: process.env.MONGODB_DB
 	}
 })
