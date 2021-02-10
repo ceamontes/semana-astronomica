@@ -1,14 +1,14 @@
 import getConfig from 'next/config'
-import {MongoClient} from 'mongodb'
+import {MongoClient, Db} from 'mongodb'
 
 const {serverRuntimeConfig: env} = getConfig()
 
-let cached = global.mongo
+let cached = (global as any).mongo
 
 if (!cached)
-	cached = global.mongo = { conn: null, promise: null }
+	cached = (global as any).mongo = { conn: null, promise: null }
 
-export async function connectToDatabase()
+export async function connectToDatabase(): Promise<{client: MongoClient, db: Db}>
 {
 	if (cached.conn)
 		return cached.conn

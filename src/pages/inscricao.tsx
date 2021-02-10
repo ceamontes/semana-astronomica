@@ -60,7 +60,7 @@ const Pedido: React.FC = () =>
 		else if (step < 4)
 			setStep(step + 1)
 		else
-			handlePayment()
+			handleRegister()
 	}
 
 	function handleSelectEvent(event: number)
@@ -98,7 +98,36 @@ const Pedido: React.FC = () =>
 		return true
 	}
 
-	function handlePayment()
+	function handleRegister()
+	{
+		const data =
+		{
+			name,
+			cpf,
+			cep,
+			street,
+			number,
+			complement,
+			neighborhood,
+			email,
+			phone,
+			paymentMethod,
+			selectedEvents
+		}
+
+		api.post('register', data)
+			.then(({data}) =>
+			{
+				handlePayment(data.id)
+			})
+			.catch(err =>
+			{
+				console.log('[err]', err.response.data)
+				errorAlert(err.response.data.message)
+			})
+	}
+
+	function handlePayment(clientId: string)
 	{
 		const data =
 		{
@@ -111,8 +140,7 @@ const Pedido: React.FC = () =>
 		api.post('payment', data)
 			.then(res =>
 			{
-				console.log('[res.data]', res.data)
-				router.push(`/sucesso?link=${res.data.link}`)
+				router.push(`/sucesso?link=${res.data.link}&id=${clientId}`)
 			})
 			.catch(err =>
 			{
