@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import {useEffect, useState} from 'react'
-import {FiArrowLeft, FiCheck, FiX, FiInfo} from 'react-icons/fi'
+import {FiArrowLeft, FiInfo} from 'react-icons/fi'
 import {FaAngleLeft, FaAngleRight} from 'react-icons/fa'
 import {useRouter} from 'next/router'
 import Image from 'next/image'
@@ -8,12 +8,13 @@ import Image from 'next/image'
 import events from '../../db/events.json'
 import prices from '../../db/prices.json'
 
-import Container, {Card} from '../styles/pages/inscricao'
+import Container from '../styles/pages/inscricao'
 import logo from '../assets/logo.svg'
 import warningAlert from '../utils/alerts/warning'
 import api from '../services/api'
 import formatPrice from '../utils/formatPrice'
 import errorAlert from '../utils/alerts/error'
+import Card from '../components/Card'
 
 const Pedido: React.FC = () =>
 {
@@ -199,42 +200,13 @@ const Pedido: React.FC = () =>
 					<h1>Selecione os eventos em que você deseja participar</h1>
 					<div className='grid'>
 						{events.map((event, index) => (
-							<Card key={index} isSelected={selectedEvents.includes(index)} >
-								<div className='img'>
-									<Image src={event.image} width={500} height={350} />
-								</div>
-								<h2>{event.title}</h2>
-								<div className='group'>
-									<span>{event.date}</span>
-									<span>{event.time}</span>
-								</div>
-								<ul className='lecturers'>
-									{event.lecturers.map((lecturer, index) => (
-										<li key={index} >
-											{lecturer}
-										</li>
-									))}
-								</ul>
-								<p>{event.description}</p>
-
-								<button className='select' onClick={() => handleSelectEvent(index)}>
-									{
-										!selectedEvents.includes(index)
-										? (
-											<>
-												<FiCheck size={15} />
-												<span>Selecionar</span>
-											</>
-										)
-										: (
-											<>
-												<FiX size={15} />
-												<span>Deselecionar</span>
-											</>
-										)
-									}
-								</button>
-							</Card>
+							<Card
+								key={index}
+								isSelected={selectedEvents.includes(index)}
+								event={event}
+								index={index}
+								handleSelectEvent={handleSelectEvent}
+							/>
 						))}
 					</div>
 				</main>
