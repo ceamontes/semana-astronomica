@@ -7,7 +7,7 @@ interface ContainerProps
 
 const Container = styled.div<ContainerProps>`
 	height: 50rem;
-	width: 33rem;
+	width: 30rem;
 	background-color: ${p => p.theme.background};
 
 	padding: 1rem;

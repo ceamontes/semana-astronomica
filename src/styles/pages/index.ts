@@ -87,7 +87,7 @@ const Container = styled.div`
 	.textBlock
 	{
 		width: 95%;
-		background-color: ${p => p.theme.textWhite}80;
+		background-color: ${p => p.theme.textWhite}bf;
 		border-radius: 1rem;
 		padding: 1rem;
 
@@ -116,7 +116,7 @@ const Container = styled.div`
 
 	.contact
 	{
-		background-color: ${p => p.theme.textGray}80;
+		background-color: ${p => p.theme.textGray}bf;
 
 		h1
 		{
@@ -179,6 +179,18 @@ const Container = styled.div`
 		}
 	}
 
+	.events
+	{
+		width: 100%;
+
+		display: grid;
+		grid-auto-rows: 50rem;
+		grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+		grid-gap: 2rem;
+		align-items: center;
+		justify-items: center;
+	}
+
 	@media(min-width: 1100px)
 	{
 		padding: 5rem;
@@ -224,7 +236,7 @@ const Container = styled.div`
 			}
 		}
 
-		.textBlock
+		.textBlock, .events
 		{
 			width: 60%;
 		}
