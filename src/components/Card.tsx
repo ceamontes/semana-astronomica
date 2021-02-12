@@ -11,9 +11,11 @@ interface CardProps
 
 	index: number
 	handleSelectEvent: Function
+
+	showSelect?: boolean
 }
 
-const Card: React.FC<CardProps> = ({isSelected, event, index, handleSelectEvent}) =>
+const Card: React.FC<CardProps> = ({isSelected, event, index, handleSelectEvent, showSelect = true}) =>
 {
 	return (
 		<Container isSelected={isSelected} >
@@ -34,23 +36,25 @@ const Card: React.FC<CardProps> = ({isSelected, event, index, handleSelectEvent}
 			</ul>
 			<p>{event.description}</p>
 
-			<button className='select' onClick={() => handleSelectEvent(index)}>
-				{
-					!isSelected
-					? (
-						<>
-							<FiCheck size={15} />
-							<span>Selecionar</span>
-						</>
-					)
-					: (
-						<>
-							<FiX size={15} />
-							<span>Deselecionar</span>
-						</>
-					)
-				}
-			</button>
+			{showSelect && (
+				<button className='select' onClick={() => handleSelectEvent(index)}>
+					{
+						!isSelected
+						? (
+							<>
+								<FiCheck size={15} />
+								<span>Selecionar</span>
+							</>
+						)
+						: (
+							<>
+								<FiX size={15} />
+								<span>Remover</span>
+							</>
+						)
+					}
+				</button>
+			)}
 		</Container>
 	)
 }
