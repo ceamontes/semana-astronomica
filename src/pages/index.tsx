@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import {AiOutlineForm} from 'react-icons/ai'
@@ -7,6 +6,7 @@ import {useRouter} from 'next/dist/client/router'
 import Container from '../styles/pages/index'
 import background from '../assets/background.jpg'
 import logo from '../assets/logo.svg'
+import SEOHead from '../components/SEOHead'
 
 const Home: React.FC = () =>
 {
@@ -14,9 +14,7 @@ const Home: React.FC = () =>
 
 	return (
 		<Container>
-			<Head>
-				<title>Home</title>
-			</Head>
+			<SEOHead />
 
 			<div className='background'>
 				<Image src={background} layout='fill' />

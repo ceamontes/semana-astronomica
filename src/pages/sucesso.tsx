@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
 import Image from 'next/image'
@@ -6,6 +5,7 @@ import {FiCheckCircle, FiExternalLink} from 'react-icons/fi'
 
 import Container from '../styles/pages/sucesso'
 import logo from '../assets/logo.svg'
+import SEOHead from '../components/SEOHead'
 
 const Success: React.FC = () =>
 {
@@ -22,9 +22,9 @@ const Success: React.FC = () =>
 
 	return (
 		<Container>
-			<Head>
-				<title>Sucesso</title>
-			</Head>
+			<SEOHead
+				title='Sucesso - 2ª Semana Astronômica | CEAMONTES'
+			/>
 
 			<header>
 				<div className='img'>

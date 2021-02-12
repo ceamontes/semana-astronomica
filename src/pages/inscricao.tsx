@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import {useEffect, useState} from 'react'
 import {FiArrowLeft, FiInfo} from 'react-icons/fi'
 import {FaAngleLeft, FaAngleRight} from 'react-icons/fa'
@@ -15,6 +14,7 @@ import api from '../services/api'
 import formatPrice from '../utils/formatPrice'
 import errorAlert from '../utils/alerts/error'
 import Card from '../components/Card'
+import SEOHead from '../components/SEOHead'
 
 const Pedido: React.FC = () =>
 {
@@ -152,9 +152,9 @@ const Pedido: React.FC = () =>
 
 	return (
 		<Container step={step} >
-			<Head>
-				<title>Pedido</title>
-			</Head>
+			<SEOHead
+				title='Inscrição - 2ª Semana Astronômica | CEAMONTES'
+			/>
 			
 			<header>
 				<div className='group'>
