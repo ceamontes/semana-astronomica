@@ -143,13 +143,14 @@ const Container = styled.div<ContainerProps>`
 		gap: 2rem;
 
 		padding: 1rem;
+		padding-top: 2rem;
 		padding-bottom: calc(5rem + 1rem + 1rem);
 
 		h1
 		{
 			font-family: Roboto;
 			font-weight: 700;
-			font-size: 2rem;
+			font-size: 2.5rem;
 
 			color: ${p => p.theme.primary};
 		}
@@ -197,7 +198,7 @@ const Container = styled.div<ContainerProps>`
 					border: none;
 					border-bottom: ${p => p.theme.gray} 2px solid;
 					background-color: ${p => p.theme.textGray}80;
-					height: 2.5rem;
+					height: 3rem;
 
 					font-family: Roboto;
 					font-size: 2rem;
@@ -341,7 +342,7 @@ const Container = styled.div<ContainerProps>`
 
 			p
 			{
-				width: 75vw;
+				width: 75%;
 
 				font-family: Roboto;
 				font-size: 1.5rem;
@@ -389,6 +390,19 @@ const Container = styled.div<ContainerProps>`
 		header .group
 		{
 			flex-direction: row;
+
+			.cancel
+			{
+				margin: 0;
+			}
+		}
+
+		main
+		{
+			form, .disclaimer, .confirmArea
+			{
+				width: 50vw;
+			}
 		}
 	}
 `
