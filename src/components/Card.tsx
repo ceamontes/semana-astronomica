@@ -6,16 +6,16 @@ import events from '../../db/events.json'
 
 interface CardProps
 {
-	isSelected: boolean
 	event: typeof events[0]
-
-	index: number
-	handleSelectEvent: Function
+	isSelected?: boolean
 
 	showSelect?: boolean
+
+	handleSelectEvent?: Function
+	index?: number
 }
 
-const Card: React.FC<CardProps> = ({isSelected, event, index, handleSelectEvent, showSelect = true}) =>
+const Card: React.FC<CardProps> = ({isSelected=false, event, index, handleSelectEvent, showSelect = true}) =>
 {
 	return (
 		<Container isSelected={isSelected} >
