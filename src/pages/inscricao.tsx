@@ -16,6 +16,7 @@ import errorAlert from '../utils/alerts/error'
 import Card from '../components/Card'
 import SEOHead from '../components/SEOHead'
 import successAlert from '../utils/alerts/success'
+import Loading from '../components/Loading'
 
 const Pedido: React.FC = () =>
 {
@@ -36,6 +37,8 @@ const Pedido: React.FC = () =>
 
 	const [paymentMethod, setPaymentMethod] = useState('')
 	const [price, setPrice] = useState(0)
+
+	const [showLoading, setShowLoading] = useState(false)
 
 	useEffect(() =>
 	{
@@ -102,6 +105,8 @@ const Pedido: React.FC = () =>
 
 	function handleRegister()
 	{
+		setShowLoading(true)
+
 		const data =
 		{
 			name,
@@ -124,6 +129,7 @@ const Pedido: React.FC = () =>
 			})
 			.catch(err =>
 			{
+				setShowLoading(false)
 				console.log('[err]', err.response.data)
 				errorAlert(err.response.data.message)
 			})
@@ -142,11 +148,13 @@ const Pedido: React.FC = () =>
 		api.post('payment', data)
 			.then(res =>
 			{
+				setShowLoading(false)
 				successAlert('Inscrição registrada com sucesso!')
 				router.push(`/sucesso?link=${res.data.link}&id=${clientId}`)
 			})
 			.catch(err =>
 			{
+				setShowLoading(false)
 				console.log('[err]', err.response.data)
 				errorAlert(err.response.data.message)
 			})
@@ -157,6 +165,8 @@ const Pedido: React.FC = () =>
 			<SEOHead
 				title='Inscrição - 2ª Semana Astronômica | CEAMONTES'
 			/>
+
+			<Loading isOpen={showLoading} />
 			
 			<header>
 				<div className='group'>
