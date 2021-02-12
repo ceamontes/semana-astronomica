@@ -15,6 +15,7 @@ import formatPrice from '../utils/formatPrice'
 import errorAlert from '../utils/alerts/error'
 import Card from '../components/Card'
 import SEOHead from '../components/SEOHead'
+import successAlert from '../utils/alerts/success'
 
 const Pedido: React.FC = () =>
 {
@@ -141,6 +142,7 @@ const Pedido: React.FC = () =>
 		api.post('payment', data)
 			.then(res =>
 			{
+				successAlert('Inscrição registrada com sucesso!')
 				router.push(`/sucesso?link=${res.data.link}&id=${clientId}`)
 			})
 			.catch(err =>
