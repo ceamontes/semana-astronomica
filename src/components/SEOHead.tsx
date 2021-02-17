@@ -13,7 +13,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({title}) =>
 	const meta =
 	{
 		title: title ? title : '2ª Semana Astronômica | CEAMONTES',
-		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas hendrerit, odio nec dignissim consequat, nisi ante mollis ipsum, sed aliquet sem augue quis risus. Donec posuere placerat purus, at tempor justo cursus at. Suspendisse at ex eget elit lacinia tempus.',
+		description: 'Site de inscrição para a 2ª Semana Astronômica, um evento realizado pelo CEAMONTES que tem como objetivo oferecer conhecimentos na área da Astronomia para a região do Norte de Minas Gerais por um baixo custo, o qual é convertido para mais projetos da nossa associação.',
 		image: `${env.baseUrl}/thumbnail.png`,
 		url: env.baseUrl
 	}
