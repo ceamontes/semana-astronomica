@@ -41,6 +41,25 @@ const Container = styled.div`
 		}
 	}
 
+	.id
+	{
+		width: 100%;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		padding-left: 1rem;
+		padding-right: 1rem;
+
+		span
+		{
+			font-family: Roboto;
+			font-size: 1.75rem;
+			color: ${p => p.theme.primary};
+		}
+	}
+
 	main
 	{
 		display: flex;
@@ -102,6 +121,11 @@ const Container = styled.div`
 	@media(min-width: 1100px)
 	{
 		header
+		{
+			width: 50vw;
+		}
+
+		.id
 		{
 			width: 50vw;
 		}

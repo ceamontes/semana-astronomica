@@ -9,16 +9,20 @@ import SEOHead from '../components/SEOHead'
 
 const Success: React.FC = () =>
 {
-	const router = useRouter()
+	const {query} = useRouter()
 
 	const [link, setLink] = useState('')
+	const [id, setId] = useState('')
 
 	useEffect(() =>
 	{
-		const {link: tmpLink} = router.query
+		const {link: tmpLink, id: tmpId} = query
+
 		if (typeof tmpLink === 'string')
 			setLink(tmpLink)
-	}, [router.query])
+		if (typeof tmpId === 'string')
+			setId(tmpId)
+	}, [query])
 
 	return (
 		<Container>
@@ -37,6 +41,10 @@ const Success: React.FC = () =>
 					</h1>
 				</div>
 			</header>
+
+			<div className='id'>
+				<span>A identificação de sua inscrição é <strong>{id}</strong>.</span>
+			</div>
 
 			<main>
 				<p>
