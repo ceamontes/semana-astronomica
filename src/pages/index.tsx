@@ -50,10 +50,11 @@ const Home: React.FC = () =>
 			</div>
 
 			<div className='events'>
-				{events.map(event => (
+				{events.map((event, index) => (
 					<Card
 						event={event}
 						showSelect={false}
+						key={index}
 					/>
 				))}
 			</div>
