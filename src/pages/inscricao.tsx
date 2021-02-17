@@ -367,7 +367,7 @@ const Pedido: React.FC = () =>
 
 			{step === 4 && (
 				<main>
-					<h1>Confirme seu pedido antes de finalizar</h1>
+					<h1>Confirme sua inscrição antes de finalizar</h1>
 					<div className='confirmArea'>
 						<h2>Eventos ({selectedEvents.length})</h2>
 						<div className='grid' >
