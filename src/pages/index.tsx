@@ -42,7 +42,7 @@ const Home: React.FC = () =>
 			<div id='semana-astronomica' className='textBlock' >
 				<h1>2ª SEMANA ASTRONÔMICA</h1>
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas hendrerit, odio nec dignissim consequat, nisi ante mollis ipsum, sed aliquet sem augue quis risus. Donec posuere placerat purus, at tempor justo cursus at. Suspendisse at ex eget elit lacinia tempus.
+					Este é o site de inscrição para a 2ª Semana Astronômica realizada pelo CEAMONTES. Esse evento tem como objetivo oferecer conhecimentos na área da Astronomia para a região do Norte de Minas Gerais por um baixo custo, o qual é convertido para mais projetos da nossa associação.
 				</p>
 				<p>
 					Confira os eventos disponíveis abaixo:
