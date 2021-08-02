@@ -14,6 +14,6 @@
 		"isolatedModules": true,
 		"jsx": "preserve"
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/utils/mongodb.ts"],
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/services/mongodb.ts"],
 	"exclude": ["node_modules"]
 }

@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import {FiCheck, FiX} from 'react-icons/fi'
 
-import Container from '../styles/components/Card'
-import events from '../../db/events.json'
+import Container from './styles'
+import events from '../../../db/events.json'
 
 interface CardProps {
 	event: typeof events[0]

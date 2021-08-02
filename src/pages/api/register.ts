@@ -1,5 +1,5 @@
 import {NextApiHandler} from 'next'
-import {connectToDatabase} from '../../utils/mongodb'
+import {connectToDatabase} from '../../services/mongodb'
 
 const handleRegister: NextApiHandler = async (req, res) => {
 	const {
