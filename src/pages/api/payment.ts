@@ -2,7 +2,7 @@ import {NextApiHandler} from 'next'
 import moment from 'moment'
 
 import {events} from '../../assets/db/events'
-import {prices} from '../../assets/db/prices'
+import {price} from '../../assets/db/price'
 import {getWidePay} from '../../services/widePay'
 
 const handlePayment: NextApiHandler = async (req, res) => {

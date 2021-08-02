@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react'
-import {FiArrowLeft, FiInfo} from 'react-icons/fi'
+import {useEffect, useState, ChangeEvent} from 'react'
+import {FiArrowLeft, FiInfo, FiMinus, FiPlus} from 'react-icons/fi'
 import {FaAngleLeft, FaAngleRight} from 'react-icons/fa'
 import {useRouter} from 'next/router'
 import Image from 'next/image'
 
 import {events} from '../assets/db/events'
-import {prices} from '../assets/db/prices'
+import {fullPrice, halfPrice} from '../assets/db/price'
 
 import Container from '../styles/pages/inscricao'
 import logoImg from '../assets/images/logo.svg'
@@ -13,133 +13,171 @@ import warningAlert from '../utils/alerts/warning'
 import api from '../services/api'
 import formatPrice from '../utils/formatPrice'
 import errorAlert from '../utils/alerts/error'
-import Card from '../components/Card'
 import SEOHead from '../components/SEOHead'
 import successAlert from '../utils/alerts/success'
 import Loading from '../components/Loading'
+import {Client, getDefaultClient} from '../models/client'
 
 const Pedido: React.FC = () => {
 	const router = useRouter()
 
 	const [step, setStep] = useState(1)
-	const [selectedEvents, setSelectedEvents] = useState<number[]>([])
 
-	const [name, setName] = useState('')
-	const [cpf, setCpf] = useState('')
-	const [cep, setCep] = useState('')
-	const [street, setStreet] = useState('')
-	const [number, setNumber] = useState('')
-	const [complement, setComplement] = useState('')
-	const [neighborhood, setNeighborhood] = useState('')
-	const [email, setEmail] = useState('')
-	const [phone, setPhone] = useState('')
+	const [fullTickets, setFullTickets] = useState(0)
+	const [halfTickets, setHalfTickets] = useState(0)
+	const [clients, setClients] = useState<Client[]>([])
 
-	const [paymentMethod, setPaymentMethod] = useState('')
 	const [price, setPrice] = useState(0)
+	const [paymentMethod, setPaymentMethod] = useState<
+		'boleto' | 'credit' | null
+	>(null)
 
-	const [showLoading, setShowLoading] = useState(false)
+	const [loading, setLoading] = useState(false)
 
 	useEffect(() => {
-		const quantity = selectedEvents.length
-		const tmpPrice = prices[quantity]
+		let tmpPrice = 0
+		const tmpClients: Client[] = []
+
+		if (fullTickets > 0) {
+			tmpPrice += fullTickets * fullPrice
+
+			for (let i = 0; i < fullTickets; i++)
+				tmpClients.push(getDefaultClient('full'))
+		}
+		if (halfTickets > 0) {
+			tmpPrice += halfTickets * halfPrice
+
+			for (let i = 0; i < halfTickets; i++)
+				tmpClients.push(getDefaultClient('half'))
+		}
 
 		setPrice(tmpPrice)
-	}, [selectedEvents])
+		setClients(tmpClients)
+	}, [fullTickets, halfTickets])
+
+	function handleChangeTickets(type: 'full' | 'half', action: 'more' | 'less') {
+		if (type === 'full')
+			setFullTickets(prev => {
+				if (action === 'more') return prev + 1
+				if (action === 'less' && prev > 0) return prev - 1
+
+				return prev
+			})
+
+		if (type === 'half')
+			setHalfTickets(prev => {
+				if (action === 'more') return prev + 1
+				if (action === 'less' && prev > 0) return prev - 1
+
+				return prev
+			})
+	}
+
+	function handleClientChange(index: number, e: ChangeEvent<HTMLInputElement>) {
+		const field = e.target.name
+		const value = e.target.value
+
+		setClients(prev => {
+			if (index >= prev.length) return prev
+
+			const tmpClient = prev[index]
+			if (!Object.keys(tmpClient).includes(field)) return prev
+
+			const tmpClients = [...prev]
+			tmpClients[index][field] = value
+
+			return tmpClients
+		})
+	}
 
 	function goBack() {
 		if (step > 1) setStep(step - 1)
 	}
 
 	function goNext() {
-		if (step === 1 && selectedEvents.length === 0)
-			warningAlert('Você precisa selecionar pelo menos 1 evento!')
+		if (step === 1 && fullTickets === 0 && halfTickets === 0)
+			warningAlert('Você precisa selecionar pelo menos 1 ingresso!')
 		else if (step === 2 && !isPersonalDataValid())
 			warningAlert('Você deve preencher todos os campos marcados com "*"!')
-		else if (step === 3 && paymentMethod === '')
+		else if (step === 3 && !paymentMethod)
 			warningAlert('Você precisa escolher um método de pagamento!')
 		else if (step < 4) setStep(step + 1)
 		else handleRegister()
 	}
 
-	function handleSelectEvent(event: number) {
-		const tmpSelectedEvents = [...selectedEvents]
-		const index = tmpSelectedEvents.findIndex(tmpEvent => tmpEvent === event)
-
-		if (index >= 0) tmpSelectedEvents.splice(index, 1)
-		else tmpSelectedEvents.push(event)
-
-		setSelectedEvents(tmpSelectedEvents)
-	}
-
 	function isPersonalDataValid() {
-		if (name === '') return false
-		if (cpf === '') return false
-		if (cep === '') return false
-		if (street === '') return false
-		if (number === '') return false
-		if (neighborhood === '') return false
-		if (email === '') return false
-		if (phone === '') return false
+		let isValid = true
 
-		return true
+		clients.forEach(client => {
+			if (client.name === '') isValid = false
+			if (client.cpf === '') isValid = false
+			if (client.cep === '') isValid = false
+			if (client.street === '') isValid = false
+			if (client.number === '') isValid = false
+			if (client.neighborhood === '') isValid = false
+			if (client.email === '') isValid = false
+			if (client.phone === '') isValid = false
+		})
+
+		return isValid
 	}
 
-	function handleRegister() {
-		setShowLoading(true)
+	async function handleRegister() {
+		setLoading(true)
 
-		const data = {
-			name,
-			cpf,
-			cep,
-			street,
-			number,
-			complement,
-			neighborhood,
-			email,
-			phone,
-			paymentMethod,
-			selectedEvents
-		}
+		// const data = {
+		// 	name,
+		// 	cpf,
+		// 	cep,
+		// 	street,
+		// 	number,
+		// 	complement,
+		// 	neighborhood,
+		// 	email,
+		// 	phone,
+		// 	paymentMethod,
+		// 	selectedEvents
+		// }
 
-		api
-			.post('register', data)
-			.then(({data}) => {
-				handlePayment(data.id)
-			})
-			.catch(err => {
-				setShowLoading(false)
-				console.log('[err]', err.response.data)
-				errorAlert(err.response.data.message)
-			})
+		// await api
+		// 	.post('register', data)
+		// 	.then(({data}) => {
+		// 		handlePayment(data.id)
+		// 	})
+		// 	.catch(err => {
+		// 		setLoading(false)
+		// 		console.log('[err]', err.response.data)
+		// 		errorAlert(err.response.data.message)
+		// 	})
 	}
 
-	function handlePayment(clientId: string) {
-		const data = {
-			paymentMethod,
-			name,
-			cpf,
-			selectedEvents
-		}
+	async function handlePayment(clientId: string) {
+		// const data = {
+		// 	paymentMethod,
+		// 	name,
+		// 	cpf,
+		// 	selectedEvents
+		// }
 
-		api
-			.post('payment', data)
-			.then(res => {
-				setShowLoading(false)
-				successAlert('Inscrição registrada com sucesso!')
-				router.push(`/sucesso?link=${res.data.link}&id=${clientId}`)
-			})
-			.catch(err => {
-				setShowLoading(false)
-				console.log('[err]', err.response.data)
-				errorAlert(err.response.data.message)
-			})
+		// await api
+		// 	.post('payment', data)
+		// 	.then(res => {
+		// 		successAlert('Inscrição registrada com sucesso!')
+		// 		router.push(`/sucesso?link=${res.data.link}&id=${clientId}`)
+		// 	})
+		// 	.catch(err => {
+		// 		console.log('[err]', err.response.data)
+		// 		errorAlert(err.response.data.message)
+		// 	})
+
+		setLoading(false)
 	}
 
 	return (
 		<Container step={step}>
 			<SEOHead title="Inscrição - 2ª Semana Astronômica | CEAMONTES" />
 
-			<Loading isOpen={showLoading} />
+			<Loading isOpen={loading} />
 
 			<header>
 				<div className="group">
@@ -207,17 +245,52 @@ const Pedido: React.FC = () => {
 
 			{step === 1 && (
 				<main>
-					<h1>Selecione os eventos em que você deseja participar</h1>
-					<div className="grid">
-						{events.map((event, index) => (
-							<Card
-								key={index}
-								isSelected={selectedEvents.includes(index)}
-								event={event}
-								index={index}
-								handleSelectEvent={handleSelectEvent}
-							/>
-						))}
+					<h1>Selecione os ingressos</h1>
+
+					<div className="tickets">
+						<div>
+							<div className="info">
+								<span>Inteira</span>
+								<span>{fullPrice}</span>
+							</div>
+							<div className="controller">
+								<button
+									className="less"
+									onClick={() => handleChangeTickets('full', 'less')}
+								>
+									<FiMinus />
+								</button>
+								<span>{fullTickets}</span>
+								<button
+									className="more"
+									onClick={() => handleChangeTickets('full', 'more')}
+								>
+									<FiPlus />
+								</button>
+							</div>
+						</div>
+
+						<div>
+							<div className="info">
+								<span>Meia</span>
+								<span>{halfPrice}</span>
+							</div>
+							<div className="controller">
+								<button
+									className="less"
+									onClick={() => handleChangeTickets('half', 'less')}
+								>
+									<FiMinus />
+								</button>
+								<span>{halfTickets}</span>
+								<button
+									className="more"
+									onClick={() => handleChangeTickets('half', 'more')}
+								>
+									<FiPlus />
+								</button>
+							</div>
+						</div>
 					</div>
 				</main>
 			)}
@@ -225,107 +298,110 @@ const Pedido: React.FC = () => {
 			{step === 2 && (
 				<main>
 					<h1>Informe seus dados pessoais abaixo</h1>
-					<form onSubmit={e => e.preventDefault()}>
-						{/* name */}
-						<div className="field">
-							<label htmlFor="name">Nome *</label>
-							<input
-								name="name"
-								id="name"
-								type="text"
-								value={name}
-								onChange={e => setName(e.target.value)}
-							/>
-						</div>
-						{/* cpf */}
-						<div className="field">
-							<label htmlFor="cpf">CPF *</label>
-							<input
-								name="cpf"
-								id="cpf"
-								type="text"
-								value={cpf}
-								onChange={e => setCpf(e.target.value)}
-							/>
-						</div>
-						{/* cep */}
-						<div className="field">
-							<label htmlFor="cep">Cep *</label>
-							<input
-								name="cep"
-								id="cep"
-								type="text"
-								value={cep}
-								onChange={e => setCep(e.target.value)}
-							/>
-						</div>
-						{/* street */}
-						<div className="field">
-							<label htmlFor="street">Logradouro *</label>
-							<input
-								name="street"
-								id="street"
-								type="text"
-								value={street}
-								onChange={e => setStreet(e.target.value)}
-							/>
-						</div>
-						{/* number */}
-						<div className="field">
-							<label htmlFor="number">Número *</label>
-							<input
-								name="number"
-								id="number"
-								type="text"
-								value={number}
-								onChange={e => setNumber(e.target.value)}
-							/>
-						</div>
-						{/* complement */}
-						<div className="field">
-							<label htmlFor="complement">Complemento</label>
-							<input
-								name="complement"
-								id="complement"
-								type="text"
-								value={complement}
-								onChange={e => setComplement(e.target.value)}
-							/>
-						</div>
-						{/* neighborhood */}
-						<div className="field">
-							<label htmlFor="neighborhood">Bairro *</label>
-							<input
-								name="neighborhood"
-								id="neighborhood"
-								type="text"
-								value={neighborhood}
-								onChange={e => setNeighborhood(e.target.value)}
-							/>
-						</div>
-						{/* email */}
-						<div className="field">
-							<label htmlFor="email">E-mail *</label>
-							<input
-								name="email"
-								id="email"
-								type="text"
-								value={email}
-								onChange={e => setEmail(e.target.value)}
-							/>
-						</div>
-						{/* phone */}
-						<div className="field">
-							<label htmlFor="phone">Celular *</label>
-							<input
-								name="phone"
-								id="phone"
-								type="text"
-								value={phone}
-								onChange={e => setPhone(e.target.value)}
-							/>
-						</div>
-					</form>
+
+					<div className="clients">
+						{clients.map((client, index) => (
+							<div key={index}>
+								<span className="clientTitle">
+									{index + 1}. Ingresso -{' '}
+									{client.ticketType === 'half' ? 'Meia' : 'Inteira'}
+								</span>
+								<form onSubmit={e => e.preventDefault()}>
+									{/* name */}
+									<div className="field">
+										<label htmlFor="name">Nome *</label>
+										<input
+											type="text"
+											name="name"
+											value={client.name}
+											onChange={e => handleClientChange(index, e)}
+										/>
+									</div>
+									{/* cpf */}
+									<div className="field">
+										<label htmlFor="cpf">CPF *</label>
+										<input
+											type="text"
+											name="cpf"
+											value={client.cpf}
+											onChange={e => handleClientChange(index, e)}
+										/>
+									</div>
+									{/* email */}
+									<div className="field">
+										<label htmlFor="email">E-mail *</label>
+										<input
+											type="text"
+											name="email"
+											value={client.email}
+											onChange={e => handleClientChange(index, e)}
+										/>
+									</div>
+									{/* phone */}
+									<div className="field">
+										<label htmlFor="phone">Celular *</label>
+										<input
+											type="text"
+											name="phone"
+											value={client.phone}
+											onChange={e => handleClientChange(index, e)}
+										/>
+									</div>
+									{/* cep */}
+									<div className="field">
+										<label htmlFor="cep">Cep *</label>
+										<input
+											type="text"
+											name="cep"
+											value={client.cep}
+											onChange={e => handleClientChange(index, e)}
+										/>
+									</div>
+									{/* street */}
+									<div className="field">
+										<label htmlFor="street">Logradouro *</label>
+										<input
+											type="text"
+											name="street"
+											value={client.street}
+											onChange={e => handleClientChange(index, e)}
+										/>
+									</div>
+									{/* number */}
+									<div className="field">
+										<label htmlFor="number">Número *</label>
+										<input
+											type="text"
+											name="number"
+											value={client.number}
+											onChange={e => handleClientChange(index, e)}
+										/>
+									</div>
+									{/* complement */}
+									<div className="field">
+										<label htmlFor="complement">Complemento</label>
+										<input
+											type="text"
+											name="complement"
+											value={client.complement}
+											onChange={e => handleClientChange(index, e)}
+										/>
+									</div>
+									{/* neighborhood */}
+									<div className="field">
+										<label htmlFor="neighborhood">Bairro *</label>
+										<input
+											type="text"
+											name="neighborhood"
+											value={client.neighborhood}
+											onChange={e => handleClientChange(index, e)}
+										/>
+									</div>
+								</form>
+							</div>
+						))}
+					</div>
+
 					<div className="disclaimer">
 						<FiInfo size={30} />
 						<p>
@@ -349,7 +425,7 @@ const Pedido: React.FC = () => {
 									type="radio"
 									name="paymentMethod"
 									id="boleto"
-									onChange={e => setPaymentMethod(e.target.id)}
+									onChange={() => setPaymentMethod('boleto')}
 								/>
 								<label htmlFor="boleto">Boleto</label>
 							</div>
@@ -358,7 +434,7 @@ const Pedido: React.FC = () => {
 									type="radio"
 									name="paymentMethod"
 									id="credit"
-									onChange={e => setPaymentMethod(e.target.id)}
+									onChange={() => setPaymentMethod('credit')}
 								/>
 								<label htmlFor="credit">Cartão de crédito</label>
 							</div>
@@ -371,79 +447,9 @@ const Pedido: React.FC = () => {
 				<main>
 					<h1>Confirme sua inscrição antes de finalizar</h1>
 					<div className="confirmArea">
-						<h2>Eventos ({selectedEvents.length})</h2>
-						<div className="grid">
-							{selectedEvents.map(eventIndex => {
-								const event = events[eventIndex]
-								return (
-									<li className="eventCard" key={eventIndex}>
-										<div className="img">
-											<Image
-												src={event.image}
-												width={500}
-												height={350}
-												layout="responsive"
-											/>
-										</div>
-										<h3>{event.title}</h3>
-										<div className="group">
-											<span>{event.date}</span>
-											<span>{event.time}</span>
-										</div>
-									</li>
-								)
-							})}
-						</div>
-					</div>
-					<div className="confirmArea">
-						<h2>Dados pessoais</h2>
-						<ul>
-							{/* name */}
-							<li className="confirmData">
-								<label>Nome:</label>
-								<span>{name}</span>
-							</li>
-							{/* cpf */}
-							<li className="confirmData">
-								<label>CPF:</label>
-								<span>{cpf}</span>
-							</li>
-							{/* cep */}
-							<li className="confirmData">
-								<label>Cep:</label>
-								<span>{cep}</span>
-							</li>
-							{/* street */}
-							<li className="confirmData">
-								<label>Logradouro:</label>
-								<span>{street}</span>
-							</li>
-							{/* number */}
-							<li className="confirmData">
-								<label>Número:</label>
-								<span>{number}</span>
-							</li>
-							{/* complement */}
-							<li className="confirmData">
-								<label>Complemento:</label>
-								<span>{complement}</span>
-							</li>
-							{/* neighborhood */}
-							<li className="confirmData">
-								<label>Bairro:</label>
-								<span>{neighborhood}</span>
-							</li>
-							{/* email */}
-							<li className="confirmData">
-								<label>E-mail:</label>
-								<span>{email}</span>
-							</li>
-							{/* phone */}
-							<li className="confirmData">
-								<label>Celular:</label>
-								<span>{phone}</span>
-							</li>
-						</ul>
+						<h2>Ingressos ({fullTickets + halfTickets})</h2>
+						<span>{fullTickets} inteira(s)</span>
+						<span>{halfTickets} meia(s)</span>
 					</div>
 					<div className="confirmArea">
 						<h2>Método de pagamento</h2>
@@ -452,6 +458,61 @@ const Pedido: React.FC = () => {
 							{paymentMethod === 'credit' && 'Cartão de crédito'}
 						</span>
 					</div>
+					{clients.map((client, index) => (
+						<div key={index} className="confirmArea">
+							<h2>
+								Dados pessoais ({index + 1}. Ingresso -{' '}
+								{client.ticketType === 'half' ? 'Meia' : 'Inteira'})
+							</h2>
+							<ul>
+								{/* name */}
+								<li className="confirmData">
+									<label>Nome:</label>
+									<span>{client.name}</span>
+								</li>
+								{/* cpf */}
+								<li className="confirmData">
+									<label>CPF:</label>
+									<span>{client.cpf}</span>
+								</li>
+								{/* email */}
+								<li className="confirmData">
+									<label>E-mail:</label>
+									<span>{client.email}</span>
+								</li>
+								{/* phone */}
+								<li className="confirmData">
+									<label>Celular:</label>
+									<span>{client.phone}</span>
+								</li>
+								{/* cep */}
+								<li className="confirmData">
+									<label>Cep:</label>
+									<span>{client.cep}</span>
+								</li>
+								{/* street */}
+								<li className="confirmData">
+									<label>Logradouro:</label>
+									<span>{client.street}</span>
+								</li>
+								{/* number */}
+								<li className="confirmData">
+									<label>Número:</label>
+									<span>{client.number}</span>
+								</li>
+								{/* complement */}
+								<li className="confirmData">
+									<label>Complemento:</label>
+									<span>{client.complement}</span>
+								</li>
+								{/* neighborhood */}
+								<li className="confirmData">
+									<label>Bairro:</label>
+									<span>{client.neighborhood}</span>
+								</li>
+							</ul>
+						</div>
+					))}
 				</main>
 			)}
 
