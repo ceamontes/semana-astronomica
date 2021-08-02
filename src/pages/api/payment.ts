@@ -1,17 +1,9 @@
 import {NextApiHandler} from 'next'
-import getConfig from 'next/config'
 import moment from 'moment'
-import WidePay from 'wide-pay-node'
 
-import events from '../../../db/events.json'
-import prices from '../../../db/prices.json'
-
-const {serverRuntimeConfig: env} = getConfig()
-
-const config = {
-	widePayId: env.widePayId,
-	widePayToken: env.widePayToken
-}
+import {events} from '../../assets/db/events'
+import {prices} from '../../assets/db/prices'
+import {getWidePay} from '../../services/widePay'
 
 const handlePayment: NextApiHandler = async (req, res) => {
 	const {
@@ -64,7 +56,7 @@ const handlePayment: NextApiHandler = async (req, res) => {
 		vencimento: dueDate
 	}
 
-	const widePay = new WidePay(config.widePayId, config.widePayToken)
+	const widePay = getWidePay()
 	const addResponse = await widePay.api(
 		'/recebimentos/cobrancas/adicionar',
 		options

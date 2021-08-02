@@ -1,7 +1,4 @@
 import Head from 'next/head'
-import getConfig from 'next/config'
-
-const {publicRuntimeConfig: env} = getConfig()
 
 interface SEOHeadProps {
 	title?: string
@@ -12,8 +9,8 @@ const SEOHead: React.FC<SEOHeadProps> = ({title}) => {
 		title: title ? title : '2ª Semana Astronômica | CEAMONTES',
 		description:
 			'Site de inscrição para a 2ª Semana Astronômica, um evento realizado pelo CEAMONTES que tem como objetivo oferecer conhecimentos na área da Astronomia para a região do Norte de Minas Gerais por um baixo custo, o qual é convertido para mais projetos da nossa associação.',
-		image: `${env.baseUrl}/thumbnail.png`,
-		url: env.baseUrl
+		image: `${process.env.NEXT_PUBLIC_BASE_URL}/thumbnail.png`,
+		url: process.env.NEXT_PUBLIC_BASE_URL
 	}
 
 	return (

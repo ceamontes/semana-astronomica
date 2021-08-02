@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import getConfig from 'next/config'
 import {MongoClient, Db} from 'mongodb'
-
-const {serverRuntimeConfig: env} = getConfig()
 
 let cached = (global as any).mongo
 
@@ -20,12 +17,14 @@ export async function connectToDatabase(): Promise<{
 			useUnifiedTopology: true
 		}
 
-		cached.promise = MongoClient.connect(env.mongodbUri, opts).then(client => {
-			return {
-				client,
-				db: client.db(env.mongodbDb)
+		cached.promise = MongoClient.connect(process.env.MONGODB_URI, opts).then(
+			client => {
+				return {
+					client,
+					db: client.db(process.env.MONGODB_DB)
+				}
 			}
-		})
+		)
 	}
 
 	cached.conn = await cached.promise
