@@ -4,27 +4,16 @@ import Container, {modalStyle} from '../styles/components/Loading'
 
 Modal.setAppElement('#__next')
 
-interface LoadingProps
-{
+interface LoadingProps {
 	isOpen: boolean
 }
 
-const Loading: React.FC<LoadingProps> = ({isOpen}) =>
-{
+const Loading: React.FC<LoadingProps> = ({isOpen}) => {
 	return (
-		<Modal
-			isOpen={isOpen}
-			style={modalStyle}
-		>
+		<Modal isOpen={isOpen} style={modalStyle}>
 			<Container>
 				<svg>
-					<circle
-						cx='25'
-						cy='25'
-						r='20'
-						fill='none'
-						strokeWidth='4'
-					/>
+					<circle cx="25" cy="25" r="20" fill="none" strokeWidth="4" />
 				</svg>
 			</Container>
 		</Modal>

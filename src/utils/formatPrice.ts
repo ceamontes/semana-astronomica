@@ -1,5 +1,4 @@
-function formatPrice(price: number)
-{
+function formatPrice(price: number) {
 	const formated = 'R$' + price.toFixed(2).replace('.', ',')
 	return formated
 }

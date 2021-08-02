@@ -1,5 +1,4 @@
-const theme =
-{
+const theme = {
 	textGray: '#343434',
 	textWhite: '#ffffff',
 	primary: '#5daccb',

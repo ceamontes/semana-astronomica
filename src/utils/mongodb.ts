@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import getConfig from 'next/config'
 import {MongoClient, Db} from 'mongodb'
 
@@ -5,27 +6,24 @@ const {serverRuntimeConfig: env} = getConfig()
 
 let cached = (global as any).mongo
 
-if (!cached)
-	cached = (global as any).mongo = { conn: null, promise: null }
+if (!cached) cached = (global as any).mongo = {conn: null, promise: null}
 
-export async function connectToDatabase(): Promise<{client: MongoClient, db: Db}>
-{
-	if (cached.conn)
-		return cached.conn
+export async function connectToDatabase(): Promise<{
+	client: MongoClient
+	db: Db
+}> {
+	if (cached.conn) return cached.conn
 
-	if (!cached.promise)
-	{
-		const opts =
-		{
+	if (!cached.promise) {
+		const opts = {
 			useNewUrlParser: true,
-			useUnifiedTopology: true,
+			useUnifiedTopology: true
 		}
 
-		cached.promise = MongoClient.connect(env.mongodbUri, opts).then(client =>
-		{
+		cached.promise = MongoClient.connect(env.mongodbUri, opts).then(client => {
 			return {
 				client,
-				db: client.db(env.mongodbDb),
+				db: client.db(env.mongodbDb)
 			}
 		})
 	}

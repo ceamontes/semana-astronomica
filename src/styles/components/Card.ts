@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
-interface ContainerProps
-{
+interface ContainerProps {
 	isSelected: boolean
 }
 
@@ -19,68 +18,60 @@ const Container = styled.div<ContainerProps>`
 	justify-content: space-between;
 
 	color: ${p => p.theme.primary};
-	border: ${p => p.isSelected ? p.theme.secondary : p.theme.primary + 40} 2px solid;
+	border: ${p => (p.isSelected ? p.theme.secondary : p.theme.primary + 40)} 2px
+		solid;
 	transition: 0.25s;
 
-	.img
-	{
+	.img {
 		width: 100%;
 
-		img
-		{
+		img {
 			border-radius: 1rem;
 		}
 	}
 
-	h2
-	{
+	h2 {
 		font-family: Ubuntu;
 		font-size: 2rem;
 
 		width: 100%;
 	}
 
-	.group
-	{
+	.group {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 
 		width: 100%;
 
-		span
-		{
+		span {
 			font-family: Roboto;
 			font-size: 1.5rem;
 		}
 	}
 
-	.lecturers
-	{
+	.lecturers {
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
 
 		padding-left: 5rem;
 		width: 100%;
-		
-		li
-		{
+
+		li {
 			font-family: Roboto;
 			font-size: 1.5rem;
 		}
 	}
 
-	p
-	{
+	p {
 		font-family: Roboto;
 		font-size: 1.25rem;
 
 		text-align: justify;
 	}
 
-	.select
-	{
+	.select {
 		background: none;
 		border: ${p => p.theme.primary} 1px solid;
 		color: ${p => p.theme.primary};
@@ -101,8 +92,8 @@ const Container = styled.div<ContainerProps>`
 		cursor: pointer;
 		transition: 0.25s;
 
-		:hover, :active
-		{
+		:hover,
+		:active {
 			background-color: ${p => p.theme.primary};
 			color: ${p => p.theme.background};
 		}

@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
-interface ContainerProps
-{
+interface ContainerProps {
 	step: number
 }
 
@@ -9,26 +8,23 @@ const Container = styled.div<ContainerProps>`
 	background-color: ${p => p.theme.textGray}80;
 	min-height: 100vh;
 
-	header
-	{
+	header {
 		padding: 2rem;
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
 
 		background-color: ${p => p.theme.background};
-		box-shadow: 0px 5px 5px rgba(0,0,0,0.5);
+		box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
 
-		.group
-		{
+		.group {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: space-between;
 			gap: 2rem;
 
-			.cancel
-			{
+			.cancel {
 				background: none;
 				border: ${p => p.theme.primary} 2px solid;
 				border-radius: 100rem;
@@ -48,43 +44,37 @@ const Container = styled.div<ContainerProps>`
 				cursor: pointer;
 				transition: 0.25s;
 
-				:hover
-				{
+				:hover {
 					background-color: ${p => p.theme.primary};
 					color: ${p => p.theme.background};
 					transform: scale(1.1);
 				}
 
-				span
-				{
+				span {
 					font-family: Ubuntu;
 					font-weight: 700;
 					font-size: 1.75rem;
 				}
 			}
 
-			h1
-			{
+			h1 {
 				font-family: Roboto;
 				font-weight: 700;
 				font-size: 2.5rem;
 				color: ${p => p.theme.primary};
 			}
 
-			.img
-			{
+			.img {
 				width: 20rem;
 			}
 		}
 
-		.navigate
-		{
+		.navigate {
 			display: flex;
 			align-items: center;
 			justify-content: space-around;
 
-			button
-			{
+			button {
 				background: none;
 				border: none;
 				padding: 0.5rem;
@@ -98,24 +88,20 @@ const Container = styled.div<ContainerProps>`
 				cursor: pointer;
 				transition: 0.25s;
 
-				:hover
-				{
+				:hover {
 					transform: scale(1.1);
 
-					span::after
-					{
+					span::after {
 						width: 100%;
 					}
 				}
 
-				span
-				{
+				span {
 					font-family: Ubuntu;
 					font-weight: 700;
 					font-size: 1.75rem;
 
-					::after
-					{
+					::after {
 						content: '';
 						width: 0px;
 						height: 2px;
@@ -126,8 +112,7 @@ const Container = styled.div<ContainerProps>`
 				}
 			}
 
-			ul
-			{
+			ul {
 				display: flex;
 				align-items: center;
 				gap: 0.5rem;
@@ -135,8 +120,7 @@ const Container = styled.div<ContainerProps>`
 		}
 	}
 
-	main
-	{
+	main {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -146,8 +130,7 @@ const Container = styled.div<ContainerProps>`
 		padding-top: 2rem;
 		padding-bottom: calc(5rem + 1rem + 1rem);
 
-		h1
-		{
+		h1 {
 			font-family: Roboto;
 			font-weight: 700;
 			font-size: 2.5rem;
@@ -155,8 +138,7 @@ const Container = styled.div<ContainerProps>`
 			color: ${p => p.theme.primary};
 		}
 
-		.grid
-		{
+		.grid {
 			width: 100%;
 
 			display: grid;
@@ -167,23 +149,20 @@ const Container = styled.div<ContainerProps>`
 			justify-items: center;
 		}
 
-		form
-		{
+		form {
 			width: 100%;
 			padding-right: 2rem;
-		
+
 			display: flex;
 			flex-direction: column;
 			gap: 2rem;
 
-			.field
-			{
+			.field {
 				display: flex;
 				flex-direction: column;
 				gap: 1rem;
 
-				label
-				{
+				label {
 					font-family: Ubuntu;
 					font-size: 2rem;
 					font-weight: 700;
@@ -193,8 +172,7 @@ const Container = styled.div<ContainerProps>`
 					padding-left: 1rem;
 				}
 
-				input[type=text]
-				{
+				input[type='text'] {
 					border: none;
 					border-bottom: ${p => p.theme.gray} 2px solid;
 					background-color: ${p => p.theme.textGray}80;
@@ -209,22 +187,20 @@ const Container = styled.div<ContainerProps>`
 
 					transition: 0.25s;
 
-					:focus, :hover
-					{
+					:focus,
+					:hover {
 						border-bottom-color: ${p => p.theme.primary};
 					}
 				}
 
-				.option
-				{
+				.option {
 					margin-left: 2rem;
 
 					display: flex;
 					align-items: center;
 					gap: 1rem;
 
-					label
-					{
+					label {
 						border: 0;
 						padding: 0;
 					}
@@ -232,35 +208,30 @@ const Container = styled.div<ContainerProps>`
 			}
 		}
 
-		.confirmArea
-		{
+		.confirmArea {
 			width: 100%;
 
 			display: flex;
 			flex-direction: column;
 			gap: 1rem;
 
-			*
-			{
+			* {
 				color: ${p => p.theme.primary};
 				font-family: Roboto;
 			}
 
-			h2
-			{
+			h2 {
 				border-left: ${p => p.theme.primary} 5px solid;
 				padding-left: 1rem;
 
 				font-size: 2rem;
 			}
 
-			.grid
-			{
+			.grid {
 				grid-auto-rows: 25rem;
 				grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
 
-				.eventCard
-				{
+				.eventCard {
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
@@ -273,38 +244,32 @@ const Container = styled.div<ContainerProps>`
 					border-radius: 1rem;
 					padding: 1rem;
 
-					.img img
-					{
+					.img img {
 						border-radius: 1rem;
 					}
 
-					h3
-					{
+					h3 {
 						font-size: 1.5rem;
 					}
 
-					.group
-					{
+					.group {
 						display: flex;
 						justify-content: space-between;
 
-						span
-						{
+						span {
 							font-size: 1.25rem;
 						}
 					}
 				}
 			}
 
-			ul
-			{
+			ul {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				gap: 1rem;
 
-				.confirmData
-				{
+				.confirmData {
 					margin-left: 2rem;
 					width: calc(100% - 2rem);
 
@@ -312,27 +277,23 @@ const Container = styled.div<ContainerProps>`
 					align-items: center;
 					gap: 1rem;
 
-					*
-					{
+					* {
 						font-size: 1.5rem;
 					}
 
-					label
-					{
+					label {
 						font-weight: 700;
 					}
 				}
 			}
 
-			.paymentMethod
-			{
+			.paymentMethod {
 				margin-left: 2rem;
 				font-size: 1.75rem;
 			}
 		}
 
-		.disclaimer
-		{
+		.disclaimer {
 			color: ${p => p.theme.primary};
 			width: 100%;
 
@@ -340,8 +301,7 @@ const Container = styled.div<ContainerProps>`
 			align-items: center;
 			justify-content: space-around;
 
-			p
-			{
+			p {
 				width: 75%;
 
 				font-family: Roboto;
@@ -350,8 +310,7 @@ const Container = styled.div<ContainerProps>`
 		}
 	}
 
-	.price
-	{
+	.price {
 		position: fixed;
 		right: 1rem;
 		bottom: 1rem;
@@ -370,37 +329,32 @@ const Container = styled.div<ContainerProps>`
 		padding-left: 1rem;
 		padding-right: 1rem;
 
-		h3
-		{
+		h3 {
 			font-family: Ubuntu;
 			font-size: 2rem;
 			color: ${p => p.theme.background};
 		}
 
-		span
-		{
+		span {
 			font-family: Roboto;
 			font-size: 2rem;
 			color: ${p => p.theme.background};
 		}
 	}
 
-	@media(min-width: 1100px)
-	{
-		header .group
-		{
+	@media (min-width: 1100px) {
+		header .group {
 			flex-direction: row;
 
-			.cancel
-			{
+			.cancel {
 				margin: 0;
 			}
 		}
 
-		main
-		{
-			form, .disclaimer, .confirmArea
-			{
+		main {
+			form,
+			.disclaimer,
+			.confirmArea {
 				width: 50vw;
 			}
 		}

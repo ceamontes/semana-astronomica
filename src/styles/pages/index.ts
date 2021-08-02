@@ -11,19 +11,17 @@ const Container = styled.div`
 
 	padding: 2rem;
 
-	.background
-	{
+	.background {
 		position: absolute;
 		top: 0;
 		left: 0;
-		
+
 		width: 100%;
 		height: 100%;
 
 		z-index: -1;
 
-		::before
-		{
+		::before {
 			z-index: 1;
 
 			content: '';
@@ -32,33 +30,30 @@ const Container = styled.div`
 			display: block;
 
 			position: absolute;
-			background-image: ${p => `linear-gradient(to bottom, ${p.theme.black}, rgba(0,0,0,0))`};
+			background-image: ${p =>
+				`linear-gradient(to bottom, ${p.theme.black}, rgba(0,0,0,0))`};
 		}
 	}
 
-	header
-	{
+	header {
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
 
 		width: 100%;
 
-		.logo
-		{
+		.logo {
 			width: 75vw;
 			max-width: 30rem;
 		}
 
-		nav
-		{
+		nav {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
 
-			a
-			{
+			a {
 				font-family: Ubuntu;
 				font-weight: 700;
 				font-size: 2rem;
@@ -76,16 +71,14 @@ const Container = styled.div`
 				padding-top: 1rem;
 				padding-bottom: 1rem;
 
-				:last-child
-				{
+				:last-child {
 					border: none;
 				}
 			}
 		}
 	}
 
-	.textBlock
-	{
+	.textBlock {
 		width: 95%;
 		background-color: ${p => p.theme.textWhite}bf;
 		border-radius: 1rem;
@@ -95,8 +88,7 @@ const Container = styled.div`
 		flex-direction: column;
 		gap: 1rem;
 
-		h1
-		{
+		h1 {
 			font-family: Ubuntu;
 			font-weight: 700;
 			font-size: 2rem;
@@ -104,51 +96,43 @@ const Container = styled.div`
 			color: ${p => p.theme.textGray};
 		}
 
-		p
-		{
+		p {
 			font-family: Roboto;
 			font-size: 1.5rem;
 			color: ${p => p.theme.textGray};
-			
+
 			text-indent: 1rem;
 		}
 	}
 
-	.contact
-	{
+	.contact {
 		background-color: ${p => p.theme.textGray}bf;
 
-		h1
-		{
+		h1 {
 			color: ${p => p.theme.textWhite};
 		}
 
-		ul
-		{
+		ul {
 			margin-left: 5rem;
 
-			*
-			{
+			* {
 				color: ${p => p.theme.textWhite};
 				font-family: Roboto;
 				font-size: 1.5rem;
 			}
 
-			li a
-			{
+			li a {
 				text-decoration: none;
 				font-weight: 700;
 
-				:hover
-				{
+				:hover {
 					text-decoration: underline;
 				}
 			}
 		}
 	}
 
-	.subscribe
-	{
+	.subscribe {
 		background-color: ${p => p.theme.background}80;
 		border: ${p => p.theme.primary} 2px solid;
 		border-radius: 100rem;
@@ -163,24 +147,21 @@ const Container = styled.div`
 		cursor: pointer;
 		transition: 0.25s;
 
-		:hover
-		{
+		:hover {
 			background-color: ${p => p.theme.primary};
 			color: ${p => p.theme.background};
 
 			transform: scale(1.1);
 		}
 
-		span
-		{
+		span {
 			font-family: Ubuntu;
 			font-weight: 700;
 			font-size: 2.5rem;
 		}
 	}
 
-	.events
-	{
+	.events {
 		width: 100%;
 
 		display: grid;
@@ -191,23 +172,18 @@ const Container = styled.div`
 		justify-items: center;
 	}
 
-	@media(min-width: 1100px)
-	{
+	@media (min-width: 1100px) {
 		padding: 5rem;
 
-		header
-		{
-			.logo
-			{
+		header {
+			.logo {
 				width: 30vw;
 			}
 
-			nav
-			{
+			nav {
 				flex-direction: row;
 
-				a
-				{
+				a {
 					width: fit-content;
 					flex-direction: column;
 
@@ -218,8 +194,7 @@ const Container = styled.div`
 					border: 0;
 					border-right: ${p => p.theme.textWhite}80 2px solid;
 
-					::after
-					{
+					::after {
 						content: '';
 						width: 0px;
 						height: 2px;
@@ -228,21 +203,19 @@ const Container = styled.div`
 						transition: 0.25s;
 					}
 
-					:hover::after
-					{
+					:hover::after {
 						width: 100%;
 					}
 				}
 			}
 		}
 
-		.textBlock, .events
-		{
+		.textBlock,
+		.events {
 			width: 60%;
 		}
 
-		.contact ul *
-		{
+		.contact ul * {
 			font-size: 2rem;
 		}
 	}

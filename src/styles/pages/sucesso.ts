@@ -10,21 +10,18 @@ const Container = styled.div`
 	min-height: 100vh;
 	padding: 1rem;
 
-	header
-	{
+	header {
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
 
 		width: 100%;
 
-		.img
-		{
+		.img {
 			width: 100%;
 		}
 
-		.message
-		{
+		.message {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -32,8 +29,7 @@ const Container = styled.div`
 
 			color: ${p => p.theme.primary};
 
-			h1
-			{
+			h1 {
 				width: 75%;
 
 				font-family: Ubuntu;
@@ -41,8 +37,7 @@ const Container = styled.div`
 		}
 	}
 
-	.id
-	{
+	.id {
 		width: 100%;
 
 		display: flex;
@@ -52,44 +47,38 @@ const Container = styled.div`
 		padding-left: 1rem;
 		padding-right: 1rem;
 
-		span
-		{
+		span {
 			font-family: Roboto;
 			font-size: 1.75rem;
 			color: ${p => p.theme.primary};
 		}
 	}
 
-	main
-	{
+	main {
 		display: flex;
 		align-items: center;
 		flex-direction: column;
 		gap: 2rem;
 
-		p
-		{
+		p {
 			font-family: Roboto;
 			font-size: 1.75rem;
 			color: ${p => p.theme.primary};
 
 			width: 100%;
 
-			a
-			{
+			a {
 				color: ${p => p.theme.primary};
 				text-decoration: none;
 				font-weight: 700;
 
-				:hover
-				{
-					text-decoration:  underline;
+				:hover {
+					text-decoration: underline;
 				}
 			}
 		}
 
-		.payment
-		{
+		.payment {
 			background-color: ${p => p.theme.primary};
 			padding: 1rem;
 			border-radius: 100rem;
@@ -104,13 +93,11 @@ const Container = styled.div`
 			cursor: pointer;
 			transition: 0.25s;
 
-			:hover
-			{
+			:hover {
 				transform: scale(1.1);
 			}
 
-			span
-			{
+			span {
 				font-family: Ubuntu;
 				font-size: 2.5rem;
 				font-weight: 700;
@@ -118,24 +105,19 @@ const Container = styled.div`
 		}
 	}
 
-	@media(min-width: 1100px)
-	{
-		header
-		{
+	@media (min-width: 1100px) {
+		header {
 			width: 50vw;
 		}
 
-		.id
-		{
+		.id {
 			width: 50vw;
 		}
 
-		main
-		{
+		main {
 			flex-direction: row;
 
-			p
-			{
+			p {
 				width: 50vw;
 			}
 		}
