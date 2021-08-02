@@ -3,11 +3,11 @@ import Link from 'next/link'
 import {AiOutlineForm} from 'react-icons/ai'
 import {useRouter} from 'next/dist/client/router'
 
-import events from '../../db/events.json'
+import {events} from '../assets/db/events'
 
 import Container from '../styles/pages/index'
-import background from '../assets/background.jpg'
-import logo from '../assets/logo.svg'
+import backgroundImg from '../assets/images/background.jpg'
+import logoImg from '../assets/images/logo.svg'
 import SEOHead from '../components/SEOHead'
 import Card from '../components/Card'
 
@@ -19,12 +19,18 @@ const Home: React.FC = () => {
 			<SEOHead />
 
 			<div className="background">
-				<Image src={background} layout="fill" />
+				<Image src={backgroundImg} layout="fill" alt="Background image" />
 			</div>
 
 			<header>
 				<div className="logo">
-					<Image src={logo} width={1000} height={350} layout="responsive" />
+					<Image
+						src={logoImg}
+						width={1000}
+						height={350}
+						layout="responsive"
+						alt="CEAMONTES"
+					/>
 				</div>
 				<nav>
 					<Link href="#semana-astronomica">SEMANA ASTRONÔMICA</Link>

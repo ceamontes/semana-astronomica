@@ -4,11 +4,11 @@ import {FaAngleLeft, FaAngleRight} from 'react-icons/fa'
 import {useRouter} from 'next/router'
 import Image from 'next/image'
 
-import events from '../../db/events.json'
-import prices from '../../db/prices.json'
+import {events} from '../assets/db/events'
+import {prices} from '../assets/db/prices'
 
 import Container from '../styles/pages/inscricao'
-import logo from '../assets/logo.svg'
+import logoImg from '../assets/images/logo.svg'
 import warningAlert from '../utils/alerts/warning'
 import api from '../services/api'
 import formatPrice from '../utils/formatPrice'
@@ -149,7 +149,12 @@ const Pedido: React.FC = () => {
 					</button>
 					<h1>Você está se inscrevendo na 2ª Semana Astronômica</h1>
 					<div className="img">
-						<Image src={logo} width={1000} height={350} layout="responsive" />
+						<Image
+							src={logoImg}
+							width={1000}
+							height={350}
+							layout="responsive"
+						/>
 					</div>
 				</div>
 				<div className="navigate">

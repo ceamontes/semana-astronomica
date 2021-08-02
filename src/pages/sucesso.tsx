@@ -4,7 +4,7 @@ import Image from 'next/image'
 import {FiCheckCircle, FiExternalLink} from 'react-icons/fi'
 
 import Container from '../styles/pages/sucesso'
-import logo from '../assets/logo.svg'
+import logoImg from '../assets/images/logo.svg'
 import SEOHead from '../components/SEOHead'
 
 const Success: React.FC = () => {
@@ -26,7 +26,7 @@ const Success: React.FC = () => {
 
 			<header>
 				<div className="img">
-					<Image src={logo} width={1000} height={350} layout="responsive" />
+					<Image src={logoImg} width={1000} height={350} layout="responsive" />
 				</div>
 				<div className="message">
 					<FiCheckCircle size={75} />
