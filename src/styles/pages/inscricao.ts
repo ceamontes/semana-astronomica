@@ -142,8 +142,8 @@ const Container = styled.div<ContainerProps>`
 			width: 100%;
 
 			display: grid;
-			grid-auto-rows: 50rem;
-			grid-template-columns: repeat(auto-fill, minmax(33rem, 1fr));
+			grid-auto-rows: 40rem;
+			grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
 			grid-gap: 2rem;
 			align-items: center;
 			justify-items: center;

@@ -1,9 +1,20 @@
 import {createGlobalStyle} from 'styled-components'
 
 export default createGlobalStyle`
-	:root
+	@media(max-width: 1100px)
 	{
-		font-size: 10px;
+		html
+		{
+			font-size: 93.75%;
+		}
+	}
+
+	@media(max-width: 900px)
+	{
+		html
+		{
+			font-size: 87.5%;
+		}
 	}
 
 	*
@@ -13,6 +24,11 @@ export default createGlobalStyle`
 		box-sizing: border-box;
 		outline: none;
 		-webkit-tap-highlight-color: transparent;
+	}
+
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: 50px;
 	}
 
 	body
@@ -36,6 +52,21 @@ export default createGlobalStyle`
 				background-color: ${p => p.theme.primary}bf;
 			}
 		}
+	}
+
+	body, input, textarea, button
+	{
+		font-family: Roboto;
+	}
+	
+	button
+	{
+		cursor: pointer;
+	}
+	
+	a
+	{
+		color: inherit;
 	}
 
 	.swal2-popup

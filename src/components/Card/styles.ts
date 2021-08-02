@@ -5,12 +5,12 @@ interface ContainerProps {
 }
 
 const Container = styled.div<ContainerProps>`
-	height: 50rem;
-	width: 30rem;
+	height: 40rem;
+	width: 20rem;
 	background-color: ${p => p.theme.background};
 
 	padding: 1rem;
-	border-radius: 1rem;
+	border-radius: 0.5rem;
 
 	display: flex;
 	flex-direction: column;
@@ -26,13 +26,12 @@ const Container = styled.div<ContainerProps>`
 		width: 100%;
 
 		img {
-			border-radius: 1rem;
+			border-radius: 0.5rem;
 		}
 	}
 
 	h2 {
 		font-family: Ubuntu;
-		font-size: 2rem;
 
 		width: 100%;
 	}
@@ -43,11 +42,6 @@ const Container = styled.div<ContainerProps>`
 		justify-content: space-between;
 
 		width: 100%;
-
-		span {
-			font-family: Roboto;
-			font-size: 1.5rem;
-		}
 	}
 
 	.lecturers {
@@ -55,42 +49,30 @@ const Container = styled.div<ContainerProps>`
 		flex-direction: column;
 		gap: 0.5rem;
 
-		padding-left: 5rem;
+		padding-left: 2rem;
 		width: 100%;
-
-		li {
-			font-family: Roboto;
-			font-size: 1.5rem;
-		}
 	}
 
 	p {
-		font-family: Roboto;
-		font-size: 1.25rem;
-
 		text-align: justify;
 	}
 
-	.select {
+	button.select {
 		background: none;
-		border: ${p => p.theme.primary} 1px solid;
+		border: ${p => p.theme.primary} 2px solid;
 		color: ${p => p.theme.primary};
 
 		font-family: Ubuntu;
 		font-weight: 700;
-		font-size: 1.5rem;
 
-		padding: 0.5rem;
-		padding-left: 1rem;
-		padding-right: 1rem;
-		border-radius: 100rem;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
 
 		display: flex;
 		align-items: center;
 		gap: 1rem;
 
-		cursor: pointer;
-		transition: 0.25s;
+		transition: background-color 0.2s, color 0.2s;
 
 		:hover,
 		:active {

@@ -9,7 +9,7 @@ const Container = styled.div`
 	align-items: center;
 	gap: 3rem;
 
-	padding: 2rem;
+	padding: 1rem;
 
 	.background {
 		position: absolute;
@@ -56,7 +56,7 @@ const Container = styled.div`
 			a {
 				font-family: Ubuntu;
 				font-weight: 700;
-				font-size: 2rem;
+				font-size: 1.25rem;
 
 				width: 25rem;
 
@@ -91,14 +91,14 @@ const Container = styled.div`
 		h1 {
 			font-family: Ubuntu;
 			font-weight: 700;
-			font-size: 2rem;
+			font-size: 1.5rem;
 
 			color: ${p => p.theme.textGray};
 		}
 
 		p {
 			font-family: Roboto;
-			font-size: 1.5rem;
+			/* font-size: 1.5rem; */
 			color: ${p => p.theme.textGray};
 
 			text-indent: 1rem;
@@ -110,15 +110,15 @@ const Container = styled.div`
 
 		h1 {
 			color: ${p => p.theme.textWhite};
+			font-size: 1.25rem;
 		}
 
 		ul {
-			margin-left: 5rem;
+			margin-left: 2.5rem;
 
 			* {
 				color: ${p => p.theme.textWhite};
 				font-family: Roboto;
-				font-size: 1.5rem;
 			}
 
 			li a {
@@ -132,12 +132,12 @@ const Container = styled.div`
 		}
 	}
 
-	.subscribe {
+	button.subscribe {
 		background-color: ${p => p.theme.background}80;
 		border: ${p => p.theme.primary} 2px solid;
-		border-radius: 100rem;
+		border-radius: 0.5rem;
 
-		padding: 1rem;
+		padding: 0.75rem 1rem;
 		color: ${p => p.theme.primary};
 
 		display: flex;
@@ -145,19 +145,19 @@ const Container = styled.div`
 		gap: 1rem;
 
 		cursor: pointer;
-		transition: 0.25s;
+		transition: background-color 0.2s, color 0.2s, border-radius 0.2s;
 
 		:hover {
 			background-color: ${p => p.theme.primary};
 			color: ${p => p.theme.background};
 
-			transform: scale(1.1);
+			border-radius: 0;
 		}
 
 		span {
 			font-family: Ubuntu;
 			font-weight: 700;
-			font-size: 2.5rem;
+			font-size: 1.5rem;
 		}
 	}
 
@@ -165,15 +165,15 @@ const Container = styled.div`
 		width: 100%;
 
 		display: grid;
-		grid-auto-rows: 50rem;
-		grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
-		grid-gap: 2rem;
+		grid-auto-rows: 40rem;
+		grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+		grid-gap: 1rem;
 		align-items: center;
 		justify-items: center;
 	}
 
 	@media (min-width: 1100px) {
-		padding: 5rem;
+		padding: 3rem;
 
 		header {
 			.logo {
@@ -213,10 +213,6 @@ const Container = styled.div`
 		.textBlock,
 		.events {
 			width: 60%;
-		}
-
-		.contact ul * {
-			font-size: 2rem;
 		}
 	}
 `
