@@ -1,7 +1,4 @@
-const withImages = require('next-images')
-
-module.exports = withImages(
-{
+module.exports = {
 	esModule: true,
 	serverRuntimeConfig:
 	{
@@ -14,4 +11,4 @@ module.exports = withImages(
 	{
 		baseUrl: process.env.BASE_URL
 	}
-})
+}

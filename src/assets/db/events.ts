@@ -1,7 +1,21 @@
-export const events = [
+import blackHoleImg from '../images/events/black-hole.png'
+import rocketImg from '../images/events/rocket.png'
+import skyImg from '../images/events/sky.png'
+import telescopeImg from '../images/events/telescope.png'
+
+export type Event = {
+	title: string
+	image: '*.jpg' | '*.png'
+	date: string
+	time: string
+	description: string
+	lecturers: string[]
+}
+
+export const events: Event[] = [
 	{
 		title: 'Localização no Céu Noturno',
-		image: '/events/sky.png',
+		image: skyImg,
 		date: '##/##/2021 (quinta-feira)',
 		time: '18:00 - 20:00',
 		description:
@@ -10,7 +24,7 @@ export const events = [
 	},
 	{
 		title: 'Os telescópios na Astronomia',
-		image: '/events/telescope.png',
+		image: telescopeImg,
 		date: '##/##/2021 (quinta-feira)',
 		time: '20:00 - 22:00',
 		description:
@@ -19,7 +33,7 @@ export const events = [
 	},
 	{
 		title: 'Astrofísica Estelar e Cosmologia',
-		image: '/events/black-hole.png',
+		image: blackHoleImg,
 		date: '##/##/2021 (sexta-feira)',
 		time: '18:00 - 20:00',
 		description:
@@ -28,7 +42,7 @@ export const events = [
 	},
 	{
 		title: 'A História do Programa Espacial Brasileiro',
-		image: '/events/rocket.png',
+		image: rocketImg,
 		date: '##/##/2021 (sexta-feira)',
 		time: '20:00 - 22:00',
 		description:

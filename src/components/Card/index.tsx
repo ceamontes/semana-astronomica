@@ -2,10 +2,10 @@ import Image from 'next/image'
 import {FiCheck, FiX} from 'react-icons/fi'
 
 import Container from './styles'
-import events from '../../../db/events.json'
+import {Event} from '../../assets/db/events'
 
 interface CardProps {
-	event: typeof events[0]
+	event: Event
 	isSelected?: boolean
 
 	showSelect?: boolean
@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = ({
 	return (
 		<Container isSelected={isSelected}>
 			<div className="img">
-				<Image src={event.image} width={500} height={350} />
+				<Image src={event.image as any} alt="Event image" placeholder="blur" />
 			</div>
 			<h2>{event.title}</h2>
 			<div className="group">

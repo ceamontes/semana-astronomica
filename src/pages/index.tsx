@@ -19,7 +19,12 @@ const Home: React.FC = () => {
 			<SEOHead />
 
 			<div className="background">
-				<Image src={backgroundImg} layout="fill" alt="Background image" />
+				<Image
+					src={backgroundImg}
+					layout="fill"
+					alt="Background image"
+					placeholder="blur"
+				/>
 			</div>
 
 			<header>
