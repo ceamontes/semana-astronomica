@@ -1,10 +1,9 @@
 import {useEffect, useState, ChangeEvent} from 'react'
-import {FiArrowLeft, FiInfo, FiMinus, FiPlus} from 'react-icons/fi'
+import {FiInfo, FiMinus, FiPlus, FiX} from 'react-icons/fi'
 import {FaAngleLeft, FaAngleRight} from 'react-icons/fa'
 import {useRouter} from 'next/router'
 import Image from 'next/image'
 
-import {events} from '../assets/db/events'
 import {fullPrice, halfPrice} from '../assets/db/price'
 
 import Container from '../styles/pages/inscricao'
@@ -182,7 +181,7 @@ const Pedido: React.FC = () => {
 			<header>
 				<div className="group">
 					<button className="cancel" onClick={() => router.back()}>
-						<FiArrowLeft size={30} />
+						<FiX />
 						<span>Cancelar</span>
 					</button>
 					<h1>Você está se inscrevendo na 2ª Semana Astronômica</h1>
@@ -445,7 +444,7 @@ const Pedido: React.FC = () => {
 
 			{step === 4 && (
 				<main>
-					<h1>Confirme sua inscrição antes de finalizar</h1>
+					<h1>Confirme seu pedido antes de finalizar</h1>
 					<div className="confirmArea">
 						<h2>Ingressos ({fullTickets + halfTickets})</h2>
 						<span>{fullTickets} inteira(s)</span>

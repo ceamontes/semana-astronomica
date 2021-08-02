@@ -9,7 +9,7 @@ const Container = styled.div<ContainerProps>`
 	min-height: 100vh;
 
 	header {
-		padding: 2rem;
+		padding: 1rem;
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
@@ -24,35 +24,36 @@ const Container = styled.div<ContainerProps>`
 			justify-content: space-between;
 			gap: 2rem;
 
-			.cancel {
+			button.cancel {
 				background: none;
 				border: ${p => p.theme.primary} 2px solid;
-				border-radius: 100rem;
+				color: ${p => p.theme.primary};
+				border-radius: 0.5rem;
 
-				margin-right: 50%;
-
-				padding: 0.5rem;
-				padding-left: 1rem;
-				padding-right: 1rem;
+				margin-right: auto;
+				padding: 0.5rem 1rem;
 
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				gap: 1rem;
 
-				color: ${p => p.theme.primary};
-				cursor: pointer;
-				transition: 0.25s;
+				transition: background-color 0.2s, color 0.2s, border-radius 0.2s;
 
 				:hover {
 					background-color: ${p => p.theme.primary};
 					color: ${p => p.theme.background};
-					transform: scale(1.1);
+
+					border-radius: 0;
 				}
 
 				span {
 					font-family: Ubuntu;
 					font-weight: 700;
+					font-size: 1.5rem;
+				}
+
+				svg {
 					font-size: 1.75rem;
 				}
 			}
@@ -60,12 +61,13 @@ const Container = styled.div<ContainerProps>`
 			h1 {
 				font-family: Roboto;
 				font-weight: 700;
-				font-size: 2.5rem;
 				color: ${p => p.theme.primary};
+
+				text-align: center;
 			}
 
 			.img {
-				width: 20rem;
+				width: 15rem;
 			}
 		}
 
@@ -77,20 +79,16 @@ const Container = styled.div<ContainerProps>`
 			button {
 				background: none;
 				border: none;
-				padding: 0.5rem;
-				padding-left: 1rem;
-				padding-right: 1rem;
+				padding: 0.5rem 1rem;
+
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				gap: 1rem;
+				gap: 0.5rem;
+
 				color: ${p => p.theme.primary};
-				cursor: pointer;
-				transition: 0.25s;
 
 				:hover {
-					transform: scale(1.1);
-
 					span::after {
 						width: 100%;
 					}
@@ -99,7 +97,7 @@ const Container = styled.div<ContainerProps>`
 				span {
 					font-family: Ubuntu;
 					font-weight: 700;
-					font-size: 1.75rem;
+					font-size: 1.5rem;
 
 					::after {
 						content: '';
@@ -107,7 +105,7 @@ const Container = styled.div<ContainerProps>`
 						height: 2px;
 						display: block;
 						background: ${p => p.theme.primary};
-						transition: 0.25s;
+						transition: width 0.2s;
 					}
 				}
 			}
@@ -115,7 +113,7 @@ const Container = styled.div<ContainerProps>`
 			ul {
 				display: flex;
 				align-items: center;
-				gap: 0.5rem;
+				gap: 0.25rem;
 			}
 		}
 	}
@@ -131,45 +129,33 @@ const Container = styled.div<ContainerProps>`
 		padding-bottom: calc(5rem + 1rem + 1rem);
 
 		h1 {
-			font-family: Roboto;
 			font-weight: 700;
-			font-size: 2.5rem;
-
 			color: ${p => p.theme.primary};
-		}
-
-		.grid {
-			width: 100%;
-
-			display: grid;
-			grid-auto-rows: 40rem;
-			grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-			grid-gap: 2rem;
-			align-items: center;
-			justify-items: center;
 		}
 
 		form {
 			width: 100%;
-			padding-right: 2rem;
+			padding-right: 1rem;
 
 			display: flex;
 			flex-direction: column;
-			gap: 2rem;
+			gap: 1rem;
 
 			.field {
 				display: flex;
 				flex-direction: column;
-				gap: 1rem;
+				gap: 0.5rem;
+
+				padding-left: 1.5rem;
 
 				label {
 					font-family: Ubuntu;
-					font-size: 2rem;
 					font-weight: 700;
 
 					color: ${p => p.theme.primary};
 					border-left: ${p => p.theme.primary} 5px solid;
 					padding-left: 1rem;
+					margin-left: -1.5rem;
 				}
 
 				input[type='text'] {
@@ -178,14 +164,11 @@ const Container = styled.div<ContainerProps>`
 					background-color: ${p => p.theme.textGray}80;
 					height: 3rem;
 
-					font-family: Roboto;
-					font-size: 2rem;
 					color: ${p => p.theme.primary};
 
 					padding: 1rem;
-					margin-left: 2rem;
 
-					transition: 0.25s;
+					transition: border-bottom-color 0.2s;
 
 					:focus,
 					:hover {
@@ -194,14 +177,15 @@ const Container = styled.div<ContainerProps>`
 				}
 
 				.option {
-					margin-left: 2rem;
-
 					display: flex;
 					align-items: center;
 					gap: 1rem;
 
+					cursor: pointer;
+
 					label {
 						border: 0;
+						margin: 0;
 						padding: 0;
 					}
 				}
@@ -215,6 +199,8 @@ const Container = styled.div<ContainerProps>`
 			flex-direction: column;
 			gap: 1rem;
 
+			padding-left: 1.5rem;
+
 			* {
 				color: ${p => p.theme.primary};
 				font-family: Roboto;
@@ -223,44 +209,7 @@ const Container = styled.div<ContainerProps>`
 			h2 {
 				border-left: ${p => p.theme.primary} 5px solid;
 				padding-left: 1rem;
-
-				font-size: 2rem;
-			}
-
-			.grid {
-				grid-auto-rows: 25rem;
-				grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
-
-				.eventCard {
-					display: flex;
-					flex-direction: column;
-					justify-content: space-between;
-					gap: 0.5rem;
-
-					width: 25rem;
-					height: 25rem;
-
-					background-color: ${p => p.theme.background};
-					border-radius: 1rem;
-					padding: 1rem;
-
-					.img img {
-						border-radius: 1rem;
-					}
-
-					h3 {
-						font-size: 1.5rem;
-					}
-
-					.group {
-						display: flex;
-						justify-content: space-between;
-
-						span {
-							font-size: 1.25rem;
-						}
-					}
-				}
+				margin-left: -1.5rem;
 			}
 
 			ul {
@@ -270,26 +219,16 @@ const Container = styled.div<ContainerProps>`
 				gap: 1rem;
 
 				.confirmData {
-					margin-left: 2rem;
-					width: calc(100% - 2rem);
+					width: 100%;
 
 					display: flex;
 					align-items: center;
-					gap: 1rem;
-
-					* {
-						font-size: 1.5rem;
-					}
+					gap: 0.25rem;
 
 					label {
 						font-weight: 700;
 					}
 				}
-			}
-
-			.paymentMethod {
-				margin-left: 2rem;
-				font-size: 1.75rem;
 			}
 		}
 
@@ -303,9 +242,30 @@ const Container = styled.div<ContainerProps>`
 
 			p {
 				width: 75%;
+			}
+		}
 
-				font-family: Roboto;
-				font-size: 1.5rem;
+		.clients {
+			width: 100%;
+
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
+
+			> div {
+				width: 100%;
+
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+
+				span.clientTitle {
+					margin: 0 auto;
+
+					color: ${p => p.theme.primary};
+					font-weight: 700;
+					font-size: 1.25rem;
+				}
 			}
 		}
 	}
@@ -315,29 +275,25 @@ const Container = styled.div<ContainerProps>`
 		right: 1rem;
 		bottom: 1rem;
 
-		height: 5rem;
-		width: 17rem;
+		height: 3rem;
+		width: 10rem;
 		background-color: ${p => p.theme.primary};
 
-		border-radius: 1rem;
+		border-radius: 0.5rem;
 		box-shadow: 0px 0px 10px #000;
 
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 
-		padding-left: 1rem;
-		padding-right: 1rem;
+		padding: 0 1rem;
 
 		h3 {
 			font-family: Ubuntu;
-			font-size: 2rem;
 			color: ${p => p.theme.background};
 		}
 
 		span {
-			font-family: Roboto;
-			font-size: 2rem;
 			color: ${p => p.theme.background};
 		}
 	}
@@ -352,11 +308,8 @@ const Container = styled.div<ContainerProps>`
 		}
 
 		main {
-			form,
-			.disclaimer,
-			.confirmArea {
-				width: 50vw;
-			}
+			width: 50vw;
+			margin: 0 auto;
 		}
 	}
 `
