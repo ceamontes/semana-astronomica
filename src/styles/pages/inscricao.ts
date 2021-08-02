@@ -298,6 +298,75 @@ const Container = styled.div<ContainerProps>`
 		}
 	}
 
+	.tickets {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+
+		> div {
+			width: 15rem;
+			height: 3.5rem;
+
+			border-radius: 0.5rem;
+			overflow: hidden;
+
+			display: flex;
+
+			.info {
+				width: 50%;
+				height: 100%;
+				background-color: ${p => p.theme.background};
+
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+				justify-content: center;
+				gap: 0.25rem;
+
+				padding: 0 1rem;
+				color: ${p => p.theme.primary};
+				font-weight: 700;
+			}
+
+			.controller {
+				width: 50%;
+				height: 100%;
+				background-color: ${p => p.theme.textGray};
+
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+
+				button {
+					height: 100%;
+					width: 35%;
+
+					background-color: ${p => p.theme.primary};
+					color: ${p => p.theme.textGray};
+					border: none;
+
+					font-size: 1.5rem;
+
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					transition: filter 0.2s;
+
+					:hover {
+						filter: brightness(0.5);
+					}
+				}
+
+				span {
+					color: ${p => p.theme.primary};
+					font-weight: 700;
+					font-size: 1.25rem;
+				}
+			}
+		}
+	}
+
 	@media (min-width: 1100px) {
 		header .group {
 			flex-direction: row;

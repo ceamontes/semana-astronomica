@@ -250,7 +250,7 @@ const Pedido: React.FC = () => {
 						<div>
 							<div className="info">
 								<span>Inteira</span>
-								<span>{fullPrice}</span>
+								<span>{formatPrice(fullPrice)}</span>
 							</div>
 							<div className="controller">
 								<button
@@ -272,7 +272,7 @@ const Pedido: React.FC = () => {
 						<div>
 							<div className="info">
 								<span>Meia</span>
-								<span>{halfPrice}</span>
+								<span>{formatPrice(halfPrice)}</span>
 							</div>
 							<div className="controller">
 								<button
