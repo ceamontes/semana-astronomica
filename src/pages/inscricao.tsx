@@ -101,7 +101,7 @@ const Pedido: React.FC = () => {
 		else if (step === 3 && !paymentMethod)
 			warningAlert('Você precisa escolher um método de pagamento!')
 		else if (step < 4) setStep(step + 1)
-		else handleRegister()
+		else handleFinish()
 	}
 
 	function isPersonalDataValid() {
@@ -121,30 +121,39 @@ const Pedido: React.FC = () => {
 		return isValid
 	}
 
-	async function handleRegister() {
-		setLoading(true)
-
+	async function register() {
 		const data = {clients}
 
-		await api
-			.post('register', data)
-			.then(() => handlePayment())
-			.catch(error => {
-				setLoading(false)
-				errorAlert(error.response.data.message)
-			})
+		await api.post('register', data)
 	}
 
-	async function handlePayment() {
+	async function generatePayment() {
 		const data = {clients, paymentMethod}
 
-		await api
-			.post('payment', data)
-			.then(({data}) => {
-				successAlert('Inscrição registrada com sucesso!')
-				push(`/sucesso?link=${data.link}`)
-			})
-			.catch(error => errorAlert(error.response.data.message))
+		const {data: res} = await api.post('payment', data)
+
+		return String(res.link)
+	}
+
+	async function handleFinish() {
+		setLoading(true)
+
+		try {
+			const paymentLink = await generatePayment()
+			if (!paymentLink || typeof paymentLink !== 'string') throw new Error()
+
+			await register()
+
+			const ticketsQuery = clients
+				.map(client => `id=${client.ticketId}`)
+				.join('&')
+
+			successAlert('Inscrição registrada com sucesso!')
+			push(`/sucesso?${ticketsQuery}&link=${paymentLink}`)
+		} catch (error) {
+			if (error && error.response && error.response.data)
+				errorAlert(error.response.data.message)
+		}
 
 		setLoading(false)
 	}

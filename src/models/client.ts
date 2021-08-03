@@ -1,3 +1,5 @@
+import {getRandomId} from '../utils/getRandomId'
+
 export type Client = {
 	name: string
 	cpf: string
@@ -26,7 +28,7 @@ export function getDefaultClient(ticketType: 'full' | 'half') {
 		complement: '',
 		neighborhood: '',
 		ticketType,
-		ticketId: ''
+		ticketId: getRandomId()
 	}
 
 	return defaultClient
