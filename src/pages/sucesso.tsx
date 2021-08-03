@@ -1,8 +1,7 @@
 import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
 import Image from 'next/image'
-import {FiCheckCircle, FiExternalLink} from 'react-icons/fi'
-import {FaQrcode} from 'react-icons/fa'
+import {FiCheckCircle, FiExternalLink, FiPrinter} from 'react-icons/fi'
 
 import Container from '../styles/pages/sucesso'
 import logoImg from '../assets/images/logo.svg'
@@ -21,6 +20,10 @@ const Success: React.FC = () => {
 		if (typeof tmpIds === 'string') setTicketIds([tmpIds])
 		else if (tmpIds) setTicketIds(tmpIds)
 	}, [query])
+
+	function handlePrint() {
+		window.print()
+	}
 
 	return (
 		<Container>
@@ -62,9 +65,9 @@ const Success: React.FC = () => {
 						<li key={ticket}>{ticket}</li>
 					))}
 				</ul>
-				<button>
-					<span>Gerar QR code</span>
-					<FaQrcode />
+				<button onClick={handlePrint}>
+					<span>Imprimir</span>
+					<FiPrinter />
 				</button>
 			</div>
 		</Container>
