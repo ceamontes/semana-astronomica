@@ -1,45 +1,43 @@
-import {NextApiHandler} from 'next'
+import type {NextApiHandler} from 'next'
 import moment from 'moment'
 
-import {events} from '../../assets/db/events'
-import {price} from '../../assets/db/price'
+import {fullPrice, halfPrice} from '../../assets/db/price'
 import {getWidePay} from '../../services/widePay'
+import type {Client} from '../../models/client'
+import {throwApiError} from '../../utils/throwApiError'
 
 const handlePayment: NextApiHandler = async (req, res) => {
 	const {
-		paymentMethod,
-		name,
-		cpf,
-		selectedEvents
-	}: {
-		paymentMethod: string
-		name: string
-		cpf: string
-		selectedEvents: number[]
-	} = req.body
+		clients,
+		paymentMethod
+	}: {clients: Client[] | null; paymentMethod: string} = req.body
 
-	if (!paymentMethod || !name || !cpf || !selectedEvents) {
-		res.statusCode = 400
-		res.setHeader('Content-Type', 'application/json')
-		return res.end(
-			JSON.stringify({
-				message:
-					'You need to provide payment method, name, cpf, and selected events.'
-			})
-		)
-	}
+	if (!paymentMethod || !clients || clients.length === 0)
+		return throwApiError(res, 'Informações faltando na requisição!', 400)
 
-	const quantity = selectedEvents.length
-	const pricePerItem = (prices[quantity] / quantity).toFixed(2)
+	const fullQuantity = clients.filter(
+		({ticketType}) => ticketType === 'full'
+	).length
+	const halfQuantity = clients.filter(
+		({ticketType}) => ticketType === 'half'
+	).length
 
-	const items = selectedEvents.map(index => {
-		const event = events[index]
+	const items: Array<{descricao: string; valor: string; quantidade: number}> =
+		[]
 
-		return {
-			descricao: `${event.title} (palestra)`,
-			valor: pricePerItem
-		}
-	})
+	if (fullQuantity > 0)
+		items.push({
+			descricao: '2ª Semana Astronômica - Ingresso - Inteira',
+			valor: fullPrice.toFixed(2),
+			quantidade: clients.filter(({ticketType}) => ticketType === 'full').length
+		})
+
+	if (halfQuantity > 0)
+		items.push({
+			descricao: '2ª Semana Astronômica - Ingresso - Meia',
+			valor: halfPrice.toFixed(2),
+			quantidade: clients.filter(({ticketType}) => ticketType === 'half').length
+		})
 
 	let method = 'Cartão'
 	if (paymentMethod === 'boleto') method = 'Boleto'
@@ -47,11 +45,11 @@ const handlePayment: NextApiHandler = async (req, res) => {
 
 	const dueDate = moment().add(5, 'days').format('YYYY-MM-DD')
 
-	const options = {
+	const widePayOptions = {
 		forma: method,
-		cliente: name,
+		cliente: clients[0].name,
 		pessoa: 'Física',
-		cpf: cpf,
+		cpf: clients[0].cpf,
 		itens: items,
 		vencimento: dueDate
 	}
@@ -59,7 +57,7 @@ const handlePayment: NextApiHandler = async (req, res) => {
 	const widePay = getWidePay()
 	const addResponse = await widePay.api(
 		'/recebimentos/cobrancas/adicionar',
-		options
+		widePayOptions
 	)
 
 	if (addResponse.sucesso) {
@@ -67,18 +65,12 @@ const handlePayment: NextApiHandler = async (req, res) => {
 		res.setHeader('Content-Type', 'application/json')
 		return res.end(JSON.stringify({id: addResponse.id, link: addResponse.link}))
 	} else {
-		if (addResponse.erro === 'Erro na validação dos campos.') {
-			res.statusCode = 400
-			res.setHeader('Content-Type', 'application/json')
-			return res.end(
-				JSON.stringify({validationError: true, message: addResponse.validacao})
-			)
-		} else {
-			console.log('[addResponse]', addResponse)
+		if (addResponse.erro === 'Erro na validação dos campos.')
+			return throwApiError(res, addResponse.validacao, 400)
+		else {
+			console.log('<< addResponse >>', addResponse)
 
-			res.statusCode = 500
-			res.setHeader('Content-Type', 'application/json')
-			return res.end(JSON.stringify({message: addResponse.erro}))
+			return throwApiError(res, addResponse.erro)
 		}
 	}
 }

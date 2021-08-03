@@ -1,83 +1,27 @@
 import {NextApiHandler} from 'next'
+import {Client} from '../../models/client'
 import {connectToDatabase} from '../../services/mongodb'
+import {throwApiError} from '../../utils/throwApiError'
 
-const handleRegister: NextApiHandler = async (req, res) => {
-	const {
-		name,
-		cpf,
-		cep,
-		street,
-		number,
-		complement,
-		neighborhood,
-		email,
-		phone,
-		paymentMethod,
-		selectedEvents
-	}: {
-		name: string
-		cpf: string
-		cep: string
-		street: string
-		number: string
-		complement: string
-		neighborhood: string
-		email: string
-		phone: string
-		paymentMethod: string
-		selectedEvents: number[]
-	} = req.body
+const register: NextApiHandler = async (req, res) => {
+	const {clients}: {clients: Client[] | null} = req.body
 
-	if (
-		!name ||
-		!cpf ||
-		!cep ||
-		!street ||
-		!number ||
-		!neighborhood ||
-		!email ||
-		!phone ||
-		!paymentMethod ||
-		!selectedEvents
-	) {
-		res.statusCode = 400
-		res.setHeader('Content-Type', 'application/json')
-		return res.end(
-			JSON.stringify({
-				message: 'You did not provide all the necessary information.'
-			})
-		)
-	}
-
-	const data = {
-		name,
-		cpf,
-		cep,
-		street,
-		number,
-		complement,
-		neighborhood,
-		email,
-		phone,
-		paymentMethod,
-		selectedEvents
-	}
+	if (!clients)
+		return throwApiError(res, 'Informações faltando na requisição!', 400)
 
 	const {db} = await connectToDatabase()
 	const Clients = db.collection('clients')
-	const result = await Clients.insertOne(data)
+	const result = await Clients.insertMany(clients)
 
-	if (result.insertedId) {
+	if (result.insertedCount === clients.length) {
 		res.statusCode = 200
 		res.setHeader('Content-Type', 'application/json')
-		return res.end(JSON.stringify({id: result.insertedId}))
+		return res.end()
 	} else {
-		console.log('[result]', result)
+		console.log('<< result >>', result)
 
-		res.statusCode = 500
-		res.setHeader('Content-Type', 'application/json')
-		return res.end(JSON.stringify({message: 'Falha interna!'}))
+		return throwApiError(res)
 	}
 }
 
-export default handleRegister
+export default register

@@ -18,7 +18,7 @@ import Loading from '../components/Loading'
 import {Client, getDefaultClient} from '../models/client'
 
 const Pedido: React.FC = () => {
-	const router = useRouter()
+	const {push, back} = useRouter()
 
 	const [step, setStep] = useState(1)
 
@@ -124,50 +124,27 @@ const Pedido: React.FC = () => {
 	async function handleRegister() {
 		setLoading(true)
 
-		// const data = {
-		// 	name,
-		// 	cpf,
-		// 	cep,
-		// 	street,
-		// 	number,
-		// 	complement,
-		// 	neighborhood,
-		// 	email,
-		// 	phone,
-		// 	paymentMethod,
-		// 	selectedEvents
-		// }
+		const data = {clients}
 
-		// await api
-		// 	.post('register', data)
-		// 	.then(({data}) => {
-		// 		handlePayment(data.id)
-		// 	})
-		// 	.catch(err => {
-		// 		setLoading(false)
-		// 		console.log('[err]', err.response.data)
-		// 		errorAlert(err.response.data.message)
-		// 	})
+		await api
+			.post('register', data)
+			.then(() => handlePayment())
+			.catch(error => {
+				setLoading(false)
+				errorAlert(error.response.data.message)
+			})
 	}
 
-	async function handlePayment(clientId: string) {
-		// const data = {
-		// 	paymentMethod,
-		// 	name,
-		// 	cpf,
-		// 	selectedEvents
-		// }
+	async function handlePayment() {
+		const data = {clients, paymentMethod}
 
-		// await api
-		// 	.post('payment', data)
-		// 	.then(res => {
-		// 		successAlert('Inscrição registrada com sucesso!')
-		// 		router.push(`/sucesso?link=${res.data.link}&id=${clientId}`)
-		// 	})
-		// 	.catch(err => {
-		// 		console.log('[err]', err.response.data)
-		// 		errorAlert(err.response.data.message)
-		// 	})
+		await api
+			.post('payment', data)
+			.then(({data}) => {
+				successAlert('Inscrição registrada com sucesso!')
+				push(`/sucesso?link=${data.link}`)
+			})
+			.catch(error => errorAlert(error.response.data.message))
 
 		setLoading(false)
 	}
@@ -180,7 +157,7 @@ const Pedido: React.FC = () => {
 
 			<header>
 				<div className="group">
-					<button className="cancel" onClick={() => router.back()}>
+					<button className="cancel" onClick={back}>
 						<FiX />
 						<span>Cancelar</span>
 					</button>
