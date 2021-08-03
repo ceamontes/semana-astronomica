@@ -11,13 +11,14 @@ const Success: React.FC = () => {
 	const {query} = useRouter()
 
 	const [link, setLink] = useState('')
-	const [id, setId] = useState('')
+	const [ticketIds, setTicketIds] = useState<string[]>([])
 
 	useEffect(() => {
-		const {link: tmpLink, id: tmpId} = query
+		const {link: tmpLink, id: tmpIds} = query
 
 		if (typeof tmpLink === 'string') setLink(tmpLink)
-		if (typeof tmpId === 'string') setId(tmpId)
+		if (typeof tmpIds === 'string') setTicketIds([tmpIds])
+		else if (tmpIds) setTicketIds(tmpIds)
 	}, [query])
 
 	return (
@@ -29,19 +30,13 @@ const Success: React.FC = () => {
 					<Image src={logoImg} width={1000} height={350} layout="responsive" />
 				</div>
 				<div className="message">
-					<FiCheckCircle size={75} />
+					<FiCheckCircle />
 					<h1>
 						Sua inscrição foi registrada, mas ainda falta fazer o pagamento para
 						concluí-la!
 					</h1>
 				</div>
 			</header>
-
-			<div className="id">
-				<span>
-					A identificação de sua inscrição é <strong>{id}</strong>.
-				</span>
-			</div>
 
 			<main>
 				<p>
@@ -54,9 +49,16 @@ const Success: React.FC = () => {
 				</p>
 				<a target="_blank" rel="noreferrer" href={link} className="payment">
 					<span>Fazer pagamento</span>
-					<FiExternalLink size={25} />
+					<FiExternalLink />
 				</a>
 			</main>
+
+			<div className="id">
+				<span>
+					A identificação de sua inscrição é{' '}
+					<strong>{ticketIds.toString()}</strong>.
+				</span>
+			</div>
 		</Container>
 	)
 }
