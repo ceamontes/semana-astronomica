@@ -183,9 +183,7 @@ const Home: React.FC = () => {
 				<ul>
 					<li>
 						E-mail:{' '}
-						<a href="mailto:ceamontes.org.br@gmail.com">
-							ceamontes.org.br@gmail.com
-						</a>
+						<a href="mailto:contato@ceamontes.org">contato@ceamontes.org</a>
 					</li>
 					<li>Telefone: (38) 99999-9999</li>
 				</ul>
