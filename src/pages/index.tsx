@@ -1,7 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import {AiOutlineForm} from 'react-icons/ai'
-import {useRouter} from 'next/dist/client/router'
+import {useRouter} from 'next/router'
+import {motion} from 'framer-motion'
+import {useInView} from 'react-intersection-observer'
 
 import {events} from '../assets/db/events'
 
@@ -13,6 +15,14 @@ import Card from '../components/Card'
 
 const Home: React.FC = () => {
 	const {push} = useRouter()
+
+	const {ref: button1Ref, inView: isButton1InView} = useInView()
+	const {ref: button2Ref, inView: isButton2InView} = useInView()
+	const {ref: headerRef, inView: isHeaderInView} = useInView()
+	const {ref: weekRef, inView: isWeekInView} = useInView()
+	const {ref: eventsRef, inView: isEventsInView} = useInView()
+	const {ref: aboutRef, inView: isAboutInView} = useInView()
+	const {ref: contactsRef, inView: isContactsInView} = useInView()
 
 	return (
 		<Container>
@@ -27,7 +37,15 @@ const Home: React.FC = () => {
 				/>
 			</div>
 
-			<header>
+			<motion.header
+				ref={headerRef}
+				animate={isHeaderInView ? 'shown' : 'hidden'}
+				initial="hidden"
+				variants={{
+					hidden: {opacity: 0, x: -250},
+					shown: {opacity: 1, x: 0}
+				}}
+			>
 				<div className="logo">
 					<Image
 						src={logoImg}
@@ -42,14 +60,34 @@ const Home: React.FC = () => {
 					<Link href="#sobre">SOBRE</Link>
 					<Link href="#contato">CONTATO</Link>
 				</nav>
-			</header>
+			</motion.header>
 
-			<button className="subscribe" onClick={() => push('/inscricao')}>
+			<motion.button
+				className="subscribe"
+				onClick={() => push('/inscricao')}
+				ref={button1Ref}
+				initial="hidden"
+				animate={isButton1InView ? 'shown' : 'hidden'}
+				variants={{
+					hidden: {opacity: 0.5, scale: 0},
+					shown: {opacity: 1, scale: 1}
+				}}
+			>
 				<AiOutlineForm size={30} />
 				<span>Inscreva-se</span>
-			</button>
+			</motion.button>
 
-			<div id="semana-astronomica" className="textBlock">
+			<motion.div
+				id="semana-astronomica"
+				className="textBlock"
+				ref={weekRef}
+				animate={isWeekInView ? 'shown' : 'hidden'}
+				initial="hidden"
+				variants={{
+					hidden: {opacity: 0, x: 250},
+					shown: {opacity: 1, x: 0}
+				}}
+			>
 				<h1>2ª SEMANA ASTRONÔMICA</h1>
 				<p>
 					Este é o site de inscrição para a 2ª Semana Astronômica realizada pelo
@@ -58,15 +96,34 @@ const Home: React.FC = () => {
 					custo, o qual é convertido para mais projetos da nossa associação.
 				</p>
 				<p>Confira os eventos disponíveis abaixo:</p>
-			</div>
+			</motion.div>
 
-			<div className="events">
+			<motion.div
+				className="events"
+				ref={eventsRef}
+				animate={isEventsInView ? 'shown' : 'hidden'}
+				initial="hidden"
+				variants={{
+					hidden: {opacity: 0, x: -250},
+					shown: {opacity: 1, x: 0}
+				}}
+			>
 				{events.map((event, index) => (
 					<Card event={event} showSelect={false} key={index} />
 				))}
-			</div>
+			</motion.div>
 
-			<div id="sobre" className="textBlock">
+			<motion.div
+				id="sobre"
+				className="textBlock"
+				ref={aboutRef}
+				animate={isAboutInView ? 'shown' : 'hidden'}
+				initial="hidden"
+				variants={{
+					hidden: {opacity: 0, x: 250},
+					shown: {opacity: 1, x: 0}
+				}}
+			>
 				<h1>SOBRE O CEAMONTES</h1>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
@@ -94,14 +151,34 @@ const Home: React.FC = () => {
 					tempor leo. Nullam imperdiet, velit eget tincidunt sagittis, justo ex
 					gravida nibh, nec viverra nisl libero facilisis felis.
 				</p>
-			</div>
+			</motion.div>
 
-			<button className="subscribe" onClick={() => push('/inscricao')}>
+			<motion.button
+				className="subscribe"
+				onClick={() => push('/inscricao')}
+				ref={button2Ref}
+				initial="hidden"
+				animate={isButton2InView ? 'shown' : 'hidden'}
+				variants={{
+					hidden: {opacity: 0.5, scale: 0},
+					shown: {opacity: 1, scale: 1}
+				}}
+			>
 				<AiOutlineForm size={30} />
 				<span>Inscreva-se</span>
-			</button>
+			</motion.button>
 
-			<div id="contato" className="textBlock contact">
+			<motion.div
+				id="contato"
+				className="textBlock contact"
+				ref={contactsRef}
+				animate={isContactsInView ? 'shown' : 'hidden'}
+				initial="hidden"
+				variants={{
+					hidden: {opacity: 0, x: -250},
+					shown: {opacity: 1, x: 0}
+				}}
+			>
 				<h1>CONTATO</h1>
 				<ul>
 					<li>
@@ -112,7 +189,7 @@ const Home: React.FC = () => {
 					</li>
 					<li>Telefone: (38) 99999-9999</li>
 				</ul>
-			</div>
+			</motion.div>
 		</Container>
 	)
 }

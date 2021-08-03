@@ -34,6 +34,7 @@ export default createGlobalStyle`
 	body
 	{
 		background-color: ${p => p.theme.background};
+		overflow-x: hidden;
 
 		::-webkit-scrollbar
 		{
