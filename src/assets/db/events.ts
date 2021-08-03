@@ -5,7 +5,7 @@ import telescopeImg from '../images/events/telescope.png'
 
 export type Event = {
 	title: string
-	image: '*.jpg' | '*.png'
+	image: any
 	date: string
 	time: string
 	description: string
