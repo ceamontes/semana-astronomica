@@ -2,6 +2,7 @@ import {useRouter} from 'next/router'
 import {useEffect, useState} from 'react'
 import Image from 'next/image'
 import {FiCheckCircle, FiExternalLink} from 'react-icons/fi'
+import {FaQrcode} from 'react-icons/fa'
 
 import Container from '../styles/pages/sucesso'
 import logoImg from '../assets/images/logo.svg'
@@ -53,11 +54,18 @@ const Success: React.FC = () => {
 				</a>
 			</main>
 
-			<div className="id">
-				<span>
-					A identificação de sua inscrição é{' '}
-					<strong>{ticketIds.toString()}</strong>.
-				</span>
+			<div className="tickets">
+				<h1>Tickets</h1>
+				<p>(será necessário apresentar os tickets para entrar no evento)</p>
+				<ul>
+					{ticketIds.map(ticket => (
+						<li key={ticket}>{ticket}</li>
+					))}
+				</ul>
+				<button>
+					<span>Gerar QR code</span>
+					<FaQrcode />
+				</button>
 			</div>
 		</Container>
 	)

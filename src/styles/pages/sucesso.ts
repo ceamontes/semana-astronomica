@@ -3,6 +3,7 @@ import styled from 'styled-components'
 const Container = styled.div`
 	min-height: 100vh;
 	padding: 2rem;
+	padding-bottom: 5rem;
 
 	> header,
 	main {
@@ -100,20 +101,61 @@ const Container = styled.div`
 		}
 	}
 
-	.id {
+	.tickets {
 		width: 100%;
+		padding: 0 1rem;
 
 		display: flex;
-		align-items: center;
-		justify-content: center;
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 0.5rem;
 
-		padding-left: 1rem;
-		padding-right: 1rem;
-
-		span {
-			font-family: Roboto;
-			font-size: 1.75rem;
+		> * {
 			color: ${p => p.theme.primary};
+		}
+
+		ul {
+			margin: 1rem auto;
+
+			li {
+				list-style: none;
+
+				font-weight: 700;
+				font-size: 1.5rem;
+			}
+		}
+
+		button {
+			background: none;
+			border: ${p => p.theme.primary} 2px solid;
+			border-radius: 0.5rem;
+
+			padding: 0.75rem 1rem;
+			color: ${p => p.theme.primary};
+
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+
+			cursor: pointer;
+			transition: background-color 0.2s, color 0.2s, border-radius 0.2s;
+
+			:hover {
+				background-color: ${p => p.theme.primary};
+				border-radius: 0;
+
+				color: ${p => p.theme.background};
+			}
+
+			span {
+				font-family: Ubuntu;
+				font-weight: 700;
+				font-size: 1.5rem;
+			}
+
+			svg {
+				font-size: 1.75rem;
+			}
 		}
 	}
 
